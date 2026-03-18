@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Seminar -1"
+rootProject.name = "TLIG"
 include(":app")
