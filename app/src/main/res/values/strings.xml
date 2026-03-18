@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">Seminar -1</string>
+    <string name="app_name">Seminar-1</string>
+    <string name="home_title">Domů</string>
+    <string name="messages_title">Poselství</string>
+    <string name="outline_title">Osnovy</string>
+    <string name="saved_title">Uložené</string>
+    <string name="settings_title">Nastavení</string>
 </resources>

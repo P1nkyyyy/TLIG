@@ -4,13 +4,20 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.seminar_1.components.BottomNavigationBar
+import com.example.seminar_1.screens.HomePage
+import com.example.seminar_1.screens.MessagesPage
+import com.example.seminar_1.screens.OutlinePage
+import com.example.seminar_1.screens.SavedPage
+import com.example.seminar_1.screens.SettingsPage
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 class MainActivity : ComponentActivity() {
@@ -18,30 +25,40 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Seminar1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            Seminar1Theme(true) {
+                MyAppNavigation()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun MyAppNavigation() {
+    val navController = rememberNavController()
+
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navController)
+        }
+    ) { innerPadding ->
+        NavHost(
+            navController = navController,
+            startDestination = "home",
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable("home") { HomePage() }
+            composable("messages") { MessagesPage() }
+            composable("outline") { OutlinePage() }
+            composable("saved") { SavedPage() }
+            composable("settings") { SettingsPage() }
+        }
+    }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun GreetingPreview() {
+fun AppPreview() {
     Seminar1Theme {
-        Greeting("Android")
+        MyAppNavigation()
     }
 }
