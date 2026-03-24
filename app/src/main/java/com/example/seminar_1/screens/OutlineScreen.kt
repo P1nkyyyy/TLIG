@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
-fun OutlinePage() {
+fun OutlineScreen() {
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -25,8 +25,8 @@ fun OutlinePage() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun OutlinePagePreview() {
+fun OutlineScreenPreview() {
     Seminar1Theme {
-        OutlinePage()
+        OutlineScreen()
     }
 }

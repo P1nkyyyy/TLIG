@@ -2,18 +2,17 @@ package com.example.seminar_1.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Společné barvy
-val GoldAccentLight = Color(0xFF9A6720)
-val GoldAccentDark = Color(0xFFB57C2C)
+// Light Theme Colors
+//val PrimaryLight = Color(0xFF292B51)
 
-// Světlý režim
-val BackgroundLight = Color(0xFFFAFAFA)
-val SurfaceLight = Color(0xFFFFFFFF)
-val TextPrimaryLight = Color(0xFF111827)
+val PrimaryTextLight = Color(0xFF1A1A1A)
+val SecondaryTextLight = Color(0xFF555555)
+val BackgroundColorLight = Color(0xFFFAFAFA)
+val SurfaceColorLight = Color(0xFFFFFFFF) //TODO
+//#F5F5F5
+//#F0F0F0
 
-// Tmavý režim
-val BackgroundDark = Color(0xFF121212)
-val SurfaceDark = Color(0xFF1C1C1E)
-val TextPrimaryDark = Color(0xFFE0E0E0)
-
-val Primary = Color(0xFF292B51)
+val PrimaryTextDark = Color(0xFFEAEAEA)
+val SecondaryTextDark = Color(0xFFB0B0B0)
+val BackgroundColorDark = Color(0xFF202020)
+val SurfaceColorDark = Color(0xFF121212)

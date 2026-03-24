@@ -1,4 +1,4 @@
-package com.example.seminar_1
+package com.example.seminar_1.data_classes
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

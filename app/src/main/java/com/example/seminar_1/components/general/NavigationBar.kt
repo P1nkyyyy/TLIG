@@ -1,4 +1,4 @@
-package com.example.seminar_1.components
+package com.example.seminar_1.components.general
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
@@ -38,7 +38,6 @@ fun BottomNavigationBar(navController: NavController) {
 
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surface
-
     ) {
         NavigationBarItem(
             colors = navItemColors,

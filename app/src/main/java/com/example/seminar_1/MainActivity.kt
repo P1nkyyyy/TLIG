@@ -12,12 +12,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.seminar_1.components.BottomNavigationBar
-import com.example.seminar_1.screens.HomePage
-import com.example.seminar_1.screens.MessagesPage
-import com.example.seminar_1.screens.OutlinePage
-import com.example.seminar_1.screens.SavedPage
-import com.example.seminar_1.screens.SettingsPage
+import com.example.seminar_1.components.general.BottomNavigationBar
+import com.example.seminar_1.screens.HomeScreen
+import com.example.seminar_1.screens.MessagesScreen
+import com.example.seminar_1.screens.OutlineScreen
+import com.example.seminar_1.screens.SavedMessagesScreen
+import com.example.seminar_1.screens.SettingsScreen
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 class MainActivity : ComponentActivity() {
@@ -46,11 +46,11 @@ fun MyAppNavigation() {
             startDestination = "home",
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable("home") { HomePage() }
-            composable("messages") { MessagesPage() }
-            composable("outline") { OutlinePage() }
-            composable("saved") { SavedPage() }
-            composable("settings") { SettingsPage() }
+            composable("home") { HomeScreen() }
+            composable("messages") { MessagesScreen() }
+            composable("outline") { OutlineScreen() }
+            composable("saved") { SavedMessagesScreen() }
+            composable("settings") { SettingsScreen() }
         }
     }
 }

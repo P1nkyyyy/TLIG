@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
-fun HomePage() {
+fun HomeScreen() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -62,8 +62,8 @@ fun HomePage() {
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun HomePagePreview() {
+fun HomeScreenPreview() {
     Seminar1Theme {
-        HomePage()
+        HomeScreen()
     }
 }

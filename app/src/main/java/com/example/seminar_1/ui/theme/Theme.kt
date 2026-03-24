@@ -10,20 +10,20 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 
-private val DarkColorScheme = darkColorScheme(
-    primary = GoldAccentDark,
-    background = BackgroundDark,
-    surface = SurfaceDark,
-    onBackground = TextPrimaryDark,
-    onSurface = TextPrimaryDark
+private val LightColorScheme = lightColorScheme(
+    background = BackgroundColorLight,
+    surface = SurfaceColorLight,
+    onPrimary = PrimaryTextLight,
+    onBackground = SecondaryTextLight,
+    onSurface = SecondaryTextLight,
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = GoldAccentLight,
-    background = BackgroundLight,
-    surface = SurfaceLight,
-    onBackground = TextPrimaryLight,
-    onSurface = TextPrimaryLight
+private val DarkColorScheme = darkColorScheme(
+    background = BackgroundColorDark,
+    surface = SurfaceColorDark,
+    onPrimary = PrimaryTextDark,
+    onBackground = SecondaryTextDark,
+    onSurface = SecondaryTextDark,
 )
 
 @Composable

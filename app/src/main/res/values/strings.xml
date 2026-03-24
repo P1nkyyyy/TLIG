@@ -1,8 +1,28 @@
 <resources>
-    <string name="app_name">Seminar-1</string>
+    <string name="app_name">TLIG</string>
     <string name="home_title">Domů</string>
     <string name="messages_title">Poselství</string>
     <string name="outline_title">Osnovy</string>
     <string name="saved_title">Uložené</string>
     <string name="settings_title">Nastavení</string>
+
+    // EditMessageModal
+    <string name="messages_modal_item_text_size">Velikost textu</string>
+    <string name="messages_modal_item_line_height">Řádkování</string>
+    <string name="messages_modal_item_font">Font</string>
+    <string name="messages_modal_item_bg_selection">Výběr pozadí</string>
+
+    <string name="messages_modal_title">Vzhled a čtení</string>
+    <string name="messages_modal_close_button_text">Close bottom sheet</string>
+
+    <string name="messages_settings_menu_text_edit">Text edit</string>
+    <string name="messages_settings_menu_search">Search</string>
+
+    <string name="messages_navigable_button_previous">Previous messages</string>
+    <string name="messages_navigable_button_next">Next messages</string>
+
+    <string name="messages_modal_item_text_size_decrease">Decrease size of the Message text</string>
+    <string name="messages_modal_item_text_size_increase">Increase size of the Message text</string>
+
+
 </resources>

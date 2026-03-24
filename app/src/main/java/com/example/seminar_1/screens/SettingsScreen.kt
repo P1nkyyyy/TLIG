@@ -13,20 +13,20 @@ import androidx.compose.ui.unit.dp
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
-fun SavedPage() {
+fun SettingsScreen() {
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text("Saved page")
+        Text("Settings page")
     }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun SavedPagePreview() {
+fun SettingsScreenPreview() {
     Seminar1Theme {
-        SavedPage()
+        SettingsScreen()
     }
 }
