@@ -18,17 +18,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.seminar_1.data_classes.BackgroundItem
+import com.example.seminar_1.data_classes.BackgroundItemType
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
 fun BackgroundSelector() {
     val options = listOf(
-        BackgroundItem("black", Color(0xFF000000), Color.White, Color.White),
-        BackgroundItem("white", Color(0xFFE0E0E0), Color(0xFF333333), Color(0xFF888888)),
-        BackgroundItem("dark_grey", Color(0xFF333333), Color.White, Color.White),
-        BackgroundItem("sepia", Color(0xFF443C32), Color(0xFFD2B48C), Color.White),
-        BackgroundItem("navy", Color(0xFF1B2536), Color(0xFF4A5D7E), Color.White)
+        BackgroundItemType("black", Color(0xFF000000), Color.White, Color.White),
+        BackgroundItemType("white", Color(0xFFE0E0E0), Color(0xFF333333), Color(0xFF888888)),
+        BackgroundItemType("dark_grey", Color(0xFF333333), Color.White, Color.White),
+        BackgroundItemType("sepia", Color(0xFF443C32), Color(0xFFD2B48C), Color.White),
+        BackgroundItemType("navy", Color(0xFF1B2536), Color(0xFF4A5D7E), Color.White)
     )
     
     var selectedId by remember { mutableStateOf(options[0].id) }
@@ -52,7 +52,7 @@ fun BackgroundSelector() {
 
 @Composable
 fun BackgroundCard(
-    option: BackgroundItem,
+    option: BackgroundItemType,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {

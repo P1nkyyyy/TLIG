@@ -31,7 +31,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seminar_1.R
-import com.example.seminar_1.data_classes.Message
+import com.example.seminar_1.data_classes.MessageType
 import com.example.seminar_1.ui.theme.Seminar1Theme
 import com.example.seminar_1.utils.removeNoteParser
 import kotlinx.coroutines.launch
@@ -39,7 +39,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NavigableMessagesButton(
-    currentMessage: Message,
+    currentMessage: MessageType,
     onPreviousClick: () -> Unit,
     onNextClick: () -> Unit
 ) {
@@ -88,7 +88,7 @@ fun NavigableMessagesButton(
 @Preview(showBackground = false)
 @Composable
 fun NavigableMessagesButtonPreview() {
-    val mockMessage = Message(id = 0, title = "Title", date = "Date", content = "Content", isArchived = false, isCompleted = false)
+    val mockMessage = MessageType(id = 0, title = "Title", date = "Date", content = "Content", isArchived = false, isCompleted = false)
     Seminar1Theme(false) {
         NavigableMessagesButton(
             currentMessage = mockMessage,

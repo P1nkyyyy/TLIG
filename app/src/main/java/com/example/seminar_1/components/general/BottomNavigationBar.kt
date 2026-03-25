@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.seminar_1.R
-import com.example.seminar_1.data_classes.NavigationBarItemData
+import com.example.seminar_1.data_classes.BottomNavigationBarItemType
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
@@ -31,11 +31,11 @@ fun BottomNavigationBar(navController: NavController) {
     var selectedItem by remember { mutableIntStateOf(0) }
 
     val navigationBarItems = listOf(
-        NavigationBarItemData(routeName = "home", icon = Icons.Default.Home, stringResource = R.string.home_title),
-        NavigationBarItemData(routeName = "messages", icon = Icons.Default.Favorite, stringResource = R.string.messages_title),
-        NavigationBarItemData(routeName = "outline", icon = Icons.Default.Book, stringResource = R.string.outline_title),
-        NavigationBarItemData(routeName = "saved", icon = Icons.Default.Bookmark, stringResource = R.string.saved_title),
-        NavigationBarItemData(routeName = "settings", icon = Icons.Default.Settings, stringResource = R.string.settings_title)
+        BottomNavigationBarItemType(routeName = "home", icon = Icons.Default.Home, stringResource = R.string.home_title),
+        BottomNavigationBarItemType(routeName = "messages", icon = Icons.Default.Favorite, stringResource = R.string.messages_title),
+        BottomNavigationBarItemType(routeName = "outline", icon = Icons.Default.Book, stringResource = R.string.outline_title),
+        BottomNavigationBarItemType(routeName = "saved", icon = Icons.Default.Bookmark, stringResource = R.string.saved_title),
+        BottomNavigationBarItemType(routeName = "settings", icon = Icons.Default.Settings, stringResource = R.string.settings_title)
     )
 
     NavigationBar(

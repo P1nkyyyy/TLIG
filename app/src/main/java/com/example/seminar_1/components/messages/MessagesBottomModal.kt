@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.R
-import com.example.seminar_1.data_classes.ModalItem
+import com.example.seminar_1.data_classes.ModalItemType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,10 +30,10 @@ fun MessagesBottomModal(
     onTextSize: (Int) -> Unit,
 ) {
     val items = listOf(
-        ModalItem(stringResource(R.string.messages_modal_item_text_size), { TextSizer(textSize, onTextSize) }),
-        ModalItem(stringResource(R.string.messages_modal_item_line_height), { SegmentedControl() }),
-        ModalItem(stringResource(R.string.messages_modal_item_font), { FontChanger() }),
-        ModalItem(stringResource(R.string.messages_modal_item_bg_selection), { BackgroundSelector() }),
+        ModalItemType(stringResource(R.string.messages_modal_item_text_size), { TextSizer(textSize, onTextSize) }),
+        ModalItemType(stringResource(R.string.messages_modal_item_line_height), { SegmentedControl() }),
+        ModalItemType(stringResource(R.string.messages_modal_item_font), { FontChanger() }),
+        ModalItemType(stringResource(R.string.messages_modal_item_bg_selection), { BackgroundSelector() }),
     )
 
     ModalBottomSheet(

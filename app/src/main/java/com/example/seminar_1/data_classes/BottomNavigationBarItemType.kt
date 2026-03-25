@@ -2,7 +2,7 @@ package com.example.seminar_1.data_classes
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
-data class NavigationBarItemData(
+data class BottomNavigationBarItemType(
     val routeName: String,
     val icon: ImageVector,
     val stringResource: Int,

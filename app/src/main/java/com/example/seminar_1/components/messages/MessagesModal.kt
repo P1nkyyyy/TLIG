@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.AppDatabase
-import com.example.seminar_1.data_classes.Message
+import com.example.seminar_1.data_classes.MessageType
 import com.example.seminar_1.utils.removeNoteParser
 import kotlin.collections.emptyList
 
@@ -89,11 +89,6 @@ fun MessagesModal(onDismissRequest: () -> Unit) {
     }
 }
 
-@Composable
-fun MessagesModalItem() {
-
-}
-
 fun getYearFromDate(datum: String): String {
     return datum.split(" ").lastOrNull() ?: "Neznámý rok"
 }
@@ -102,7 +97,7 @@ fun getMonthFromDate(datum: String): String {
     return datum.split(" ")[1].uppercase()
 }
 
-fun groupMessagesForModal(allMessages: List<Message>): Map<String, Map<String, List<Message>>> {
+fun groupMessagesForModal(allMessages: List<MessageType>): Map<String, Map<String, List<MessageType>>> {
     return allMessages
         // Krok A: Seskupíme celý seznam do skupin podle Roku (Map<Rok, List>)
         .groupBy { message -> getYearFromDate(removeNoteParser(message.date)) }
