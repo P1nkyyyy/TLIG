@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -42,7 +43,7 @@ fun TextSizer(
                 contentDescription = stringResource(R.string.messages_modal_item_text_size_decrease),
                 tint = Color.White,
                 modifier = Modifier
-                    .background(Color(0xFF5B5B5B))
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .padding(8.dp)
             )
         }
@@ -52,7 +53,7 @@ fun TextSizer(
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .weight(1f)
-                .border(3.dp, Color(0xFF5B5B5B), shape = RoundedCornerShape(24.dp))
+                .border(3.dp, MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(24.dp))
                 .background(Color(0xFF252525), shape = RoundedCornerShape(24.dp))
                 .padding(8.dp)
         )
@@ -64,7 +65,7 @@ fun TextSizer(
                 contentDescription = stringResource(R.string.messages_modal_item_text_size_increase),
                 tint = Color.White,
                 modifier = Modifier
-                    .background(Color(0xFF5B5B5B))
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
                     .padding(8.dp)
             )
         }

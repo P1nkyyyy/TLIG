@@ -27,7 +27,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -58,7 +57,7 @@ fun NavigableMessagesButton(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CompositionLocalProvider(
-            LocalContentColor provides Color.White
+            LocalContentColor provides MaterialTheme.colorScheme.onPrimary
         ) {
             if (showSheet)  MessagesModal(onDismissRequest = {
                 scope.launch {
@@ -75,7 +74,6 @@ fun NavigableMessagesButton(
                 onClick = { showSheet = true },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.surface,
-                    contentColor = MaterialTheme.colorScheme.onPrimary
                 )
             ) {
                 Text(removeNoteParser(currentMessage.date))
@@ -87,11 +85,11 @@ fun NavigableMessagesButton(
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = false)
 @Composable
 fun NavigableMessagesButtonPreview() {
     val mockMessage = Message(id = 0, title = "Title", date = "Date", content = "Content", isArchived = false, isCompleted = false)
-    Seminar1Theme {
+    Seminar1Theme(false) {
         NavigableMessagesButton(
             currentMessage = mockMessage,
             onPreviousClick = {},

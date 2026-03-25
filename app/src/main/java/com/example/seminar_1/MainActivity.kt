@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Seminar1Theme(true) {
+            Seminar1Theme {
                 MyAppNavigation()
             }
         }

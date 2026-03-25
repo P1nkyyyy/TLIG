@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ViewAgenda
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +48,7 @@ fun SegmentedControl() {
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .border(2.dp, Color(0xFF5B5B5B), shape = RoundedCornerShape(24.dp))
+            .border(2.dp, MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(24.dp))
             .background(Color(0xFF252525), shape = RoundedCornerShape(24.dp))
             .padding(4.dp)
     ) {
@@ -64,7 +65,7 @@ fun SegmentedControl() {
                 .offset(x = animatedOffset)
                 .width(itemWidth)
                 .fillMaxHeight()
-                .background(Color(0xFF5B5B5B), RoundedCornerShape(24.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(24.dp))
         )
 
         Row(
@@ -77,19 +78,10 @@ fun SegmentedControl() {
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = null
-                        ) {
-                            selectedIndex = index
-                        },
+                        .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { selectedIndex = index },
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = null,
-                        tint = Color.White
-                    )
+                    Icon(imageVector = icon, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
