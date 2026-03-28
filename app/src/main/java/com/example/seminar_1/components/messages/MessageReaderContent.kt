@@ -5,52 +5,49 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.seminar_1.AppDatabase
+import androidx.compose.ui.unit.sp
+import com.example.seminar_1.R
+import com.example.seminar_1.data_classes.MessageType
 import com.example.seminar_1.utils.contentParser
 import com.example.seminar_1.utils.convertNoteParser
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun MessageReaderContent() {
-    var currentMessageId by remember { mutableStateOf(1) }
-
-    // Database
-    val context = LocalContext.current
-    val db = AppDatabase.getDatabase(context)
-    val dao = db.messagesDao()
-
-    val message by dao.get(currentMessageId).collectAsState(initial = null)
-
+fun MessageReaderContent(
+    message: MessageType?,
+    messages: List<MessageType>,
+    textSize: Int,
+    lineHeight: Float,
+    fontFamily: String,
+    backgroundColor: Color,
+    contentColor: Color,
+    onNextClick: () -> Unit,
+    onPreviousClick: () -> Unit
+) {
     val scrollState = rememberScrollState()
-    LaunchedEffect(key1 = message?.id) {
+    println("Aktuální barva textu: $contentColor")
+
+    // Reset scroll when message changes
+    LaunchedEffect(message?.id) {
         scrollState.scrollTo(0)
     }
 
-    // Floating Button Logic: Hide on scroll down, Show on scroll up or at bottom
     var isVisible by remember { mutableStateOf(true) }
     var lastScrollOffset by remember { mutableIntStateOf(0) }
 
@@ -68,7 +65,18 @@ fun MessageReaderContent() {
         lastScrollOffset = currentScrollOffset
     }
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    val selectedFontFamily = when(fontFamily) {
+        "Serif" -> FontFamily.Serif
+        "SansSerif" -> FontFamily.SansSerif
+        "Monospace" -> FontFamily.Monospace
+        "Roboto" -> FontFamily(Font(R.font.roboto_serif_regular))
+        "Times New Roman" -> FontFamily(Font(R.font.times_new_roman))
+        else -> FontFamily.Default
+    }
+
+    Box(modifier = Modifier
+        .fillMaxSize()
+        .background(backgroundColor)) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -80,22 +88,35 @@ fun MessageReaderContent() {
             message?.let {
                 Text(
                     text = it.title,
-                    style = MaterialTheme.typography.displayLarge,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier.padding(bottom = 8.dp),
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontSize = (textSize * 1.2).sp,
+                        fontFamily = selectedFontFamily,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = contentColor.copy(alpha = 0.6f),
+                    textAlign = TextAlign.Center,
                 )
 
                 Text(
                     text = convertNoteParser(it.date),
-                    style = MaterialTheme.typography.headlineMedium,
-                    color = MaterialTheme.colorScheme.onPrimary,
-                    modifier = Modifier.padding(bottom = 32.dp),
+                    style = MaterialTheme.typography.displayLarge.copy(
+                        fontSize = (textSize * 2).sp,
+                        fontFamily = selectedFontFamily,
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = contentColor,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(bottom = 48.dp, top = 12.dp),
                 )
 
                 Text(
-                    text = contentParser(it.content),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onBackground,
+                    text = contentParser(it.content, contentColor),
+                    style = MaterialTheme.typography.bodyLarge.copy(
+                        fontSize = textSize.sp,
+                        lineHeight = (textSize * lineHeight).sp,
+                        fontFamily = selectedFontFamily
+                    ),
+                    color = contentColor,
                     textAlign = TextAlign.Justify,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -104,7 +125,7 @@ fun MessageReaderContent() {
             }
         }
 
-        message?.let { it ->
+        message?.let {
             AnimatedVisibility(
                 visible = isVisible,
                 enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
@@ -115,8 +136,9 @@ fun MessageReaderContent() {
             ) {
                 NavigableMessagesButton(
                     currentMessage = it,
-                    onPreviousClick = { if (currentMessageId > 1) { currentMessageId-- } },
-                    onNextClick = { currentMessageId++ }
+                    messages = messages,
+                    onPreviousClick = onPreviousClick,
+                    onNextClick = onNextClick
                 )
             }
         }

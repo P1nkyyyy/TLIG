@@ -16,21 +16,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seminar_1.data_classes.BackgroundItemType
-import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
-fun BackgroundSelector() {
+fun BackgroundSelector(
+    onBackgroundColor: (Color, Color) -> Unit
+) {
     val options = listOf(
+        BackgroundItemType("navy", Color(0xFF1B2536), Color.White, Color.White),
         BackgroundItemType("black", Color(0xFF000000), Color.White, Color.White),
-        BackgroundItemType("white", Color(0xFFE0E0E0), Color(0xFF333333), Color(0xFF888888)),
+        BackgroundItemType("white", Color(0xFFFFFFFF), Color(0xFF1A1A1A), Color(0xFF010101)),
         BackgroundItemType("dark_grey", Color(0xFF333333), Color.White, Color.White),
-        BackgroundItemType("sepia", Color(0xFF443C32), Color(0xFFD2B48C), Color.White),
-        BackgroundItemType("navy", Color(0xFF1B2536), Color(0xFF4A5D7E), Color.White)
+        BackgroundItemType("sepia", Color(0xFFF4ECD8), Color.White, Color(0xFF010101)),
     )
-    
+
     var selectedId by remember { mutableStateOf(options[0].id) }
 
     Row(
@@ -44,7 +44,10 @@ fun BackgroundSelector() {
             BackgroundCard(
                 option = option,
                 isSelected = selectedId == option.id,
-                onClick = { selectedId = option.id }
+                onClick = {
+                    selectedId = option.id
+                    onBackgroundColor(option.containerColor, option.contentColor)
+                }
             )
         }
     }
@@ -109,10 +112,10 @@ fun BackgroundCard(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun BackgroundSelectorPreview() {
-    Seminar1Theme {
-            BackgroundSelector()
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun BackgroundSelectorPreview() {
+//    Seminar1Theme {
+//        BackgroundSelector()
+//    }
+//}

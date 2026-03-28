@@ -22,7 +22,7 @@ import com.example.seminar_1.R
 @Composable
 fun MessagesSettingsMenu(
     handleTextEdit: () -> Unit,
-    handleSearch: () -> Unit
+    handleSearch: () -> Unit,
 ) {
     Row(
         modifier = Modifier

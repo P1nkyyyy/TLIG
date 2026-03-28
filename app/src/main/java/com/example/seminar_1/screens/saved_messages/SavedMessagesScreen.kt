@@ -1,4 +1,4 @@
-package com.example.seminar_1.screens
+package com.example.seminar_1.screens.saved_messages
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,24 +11,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.seminar_1.AppDatabase
 import com.example.seminar_1.data_classes.MessageType
 import com.example.seminar_1.ui.theme.Seminar1Theme
-import kotlin.collections.emptyList
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.seminar_1.components.saved.MessageCard
 import com.example.seminar_1.utils.textParser
 
 @Composable
-fun SavedMessagesScreen() {
-    val context = LocalContext.current
-
-    val db = AppDatabase.getDatabase(context)
-    val dao = db.messagesDao()
-
-    val messages by dao.getAll().collectAsState(emptyList())
+fun SavedMessagesScreen(
+    viewModel: SavedMessagesViewModel = viewModel(factory = SavedMessagesViewModel.Factory)
+) {
+    val messages by viewModel.messages.collectAsState()
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),

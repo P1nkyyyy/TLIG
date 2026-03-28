@@ -36,7 +36,7 @@ fun TextSizer(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         IconButton(
-            onClick = { onTextSize(textSize - 1) }
+            onClick = { if (textSize > 12) onTextSize(textSize - 1) }
         ) {
             Icon(
                 imageVector = Icons.Default.Remove,
@@ -58,7 +58,7 @@ fun TextSizer(
                 .padding(8.dp)
         )
         IconButton(
-            onClick = {onTextSize(textSize + 1)}
+            onClick = { if (textSize < 28) onTextSize(textSize + 1) }
         ) {
             Icon(
                 imageVector = Icons.Default.Add,

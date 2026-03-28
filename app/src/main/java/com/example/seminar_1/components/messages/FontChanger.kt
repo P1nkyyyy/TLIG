@@ -21,18 +21,21 @@ import androidx.compose.ui.unit.dp
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
-fun FontChanger() {
+fun FontChanger(
+    fontFamily: String,
+    onOpenFontSelect: () -> Unit,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(24.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
-            .clickable(onClick = {})
+            .clickable(onClick = onOpenFontSelect)
             .padding(4.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Robboto Serif",
+            text = fontFamily,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Icon(
@@ -53,6 +56,6 @@ fun FontChanger() {
 @Composable
 fun FontChangerPreview() {
     Seminar1Theme {
-        FontChanger()
+        FontChanger("Robboto Serif", {})
     }
 }

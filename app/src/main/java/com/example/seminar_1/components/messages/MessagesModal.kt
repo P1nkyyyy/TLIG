@@ -11,29 +11,20 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.seminar_1.AppDatabase
 import com.example.seminar_1.data_classes.MessageType
 import com.example.seminar_1.utils.removeNoteParser
-import kotlin.collections.emptyList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MessagesModal(onDismissRequest: () -> Unit) {
-    // Database
-    val context = LocalContext.current
-    val db = AppDatabase.getDatabase(context)
-    val dao = db.messagesDao()
-
-    val messages by dao.getAll().collectAsState(initial = null)
-
-    val groupedData = groupMessagesForModal(messages ?: emptyList())
+fun MessagesModal(
+    onDismissRequest: () -> Unit,
+    messages: List<MessageType>
+) {
+    val groupedData = groupMessagesForModal(messages)
 
     ModalBottomSheet(
         onDismissRequest
@@ -52,21 +43,6 @@ fun MessagesModal(onDismissRequest: () -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-//                Text(
-//                    text = "1993",
-//                    fontWeight = FontWeight.SemiBold,
-//                    fontSize = 24.sp
-//                )
-//                IconButton(
-//                    onClick = onDismissRequest,
-//                    modifier = Modifier.align(Alignment.CenterEnd)
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.Close,
-//                        contentDescription = "Close bottom sheet"
-//                    )
-//                }
-
                 LazyColumn {
                     groupedData.forEach { (year, monthsMap) ->
                         item {

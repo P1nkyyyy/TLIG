@@ -40,6 +40,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun NavigableMessagesButton(
     currentMessage: MessageType,
+    messages: List<MessageType>,
     onPreviousClick: () -> Unit,
     onNextClick: () -> Unit
 ) {
@@ -59,12 +60,16 @@ fun NavigableMessagesButton(
         CompositionLocalProvider(
             LocalContentColor provides MaterialTheme.colorScheme.onPrimary
         ) {
-            if (showSheet)  MessagesModal(onDismissRequest = {
-                scope.launch {
-                    sheetState.hide()
-                    showSheet = false
-                }
-            })
+            if (showSheet)
+                MessagesModal(
+                    onDismissRequest = {
+                        scope.launch {
+                            sheetState.hide()
+                            showSheet = false
+                        }
+                    },
+                    messages = messages,
+                )
 
             IconButton(onClick = onPreviousClick) {
                 Icon(imageVector = Icons.Rounded.ChevronLeft, contentDescription = stringResource(R.string.messages_navigable_button_previous))
@@ -93,7 +98,8 @@ fun NavigableMessagesButtonPreview() {
         NavigableMessagesButton(
             currentMessage = mockMessage,
             onPreviousClick = {},
-            onNextClick = {}
+            onNextClick = {},
+            messages = emptyList()
         )
     }
 }

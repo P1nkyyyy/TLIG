@@ -1,4 +1,4 @@
-package com.example.seminar_1.screens
+package com.example.seminar_1.screens.home
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

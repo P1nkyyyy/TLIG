@@ -10,39 +10,39 @@ import com.example.seminar_1.R
 
 // Using Serif as a fallback for Times New Roman if you don't have the .ttf file yet.
 // To use actual Times New Roman, add the font file to res/font and reference it here.
-val TimesNewRoman = FontFamily(Font(R.font.times_new_roman))
+val RobotoSerifRegular = FontFamily(Font(R.font.roboto_serif_regular))
 
 val Typography = Typography(
     displayLarge = TextStyle(
-        fontFamily = TimesNewRoman,
+        fontFamily = RobotoSerifRegular,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         lineHeight = 40.sp,
         letterSpacing = 0.sp
     ),
     headlineMedium = TextStyle(
-        fontFamily = TimesNewRoman,
+        fontFamily = RobotoSerifRegular,
         fontWeight = FontWeight.SemiBold,
         fontSize = 24.sp,
         lineHeight = 32.sp,
         letterSpacing = 0.sp
     ),
     titleLarge = TextStyle(
-        fontFamily = TimesNewRoman,
+        fontFamily = RobotoSerifRegular,
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.sp
     ),
     bodyLarge = TextStyle(
-        fontFamily = TimesNewRoman,
+        fontFamily = RobotoSerifRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 18.sp,
         lineHeight = 28.sp,
         letterSpacing = 0.5.sp
     ),
     bodyMedium = TextStyle(
-        fontFamily = TimesNewRoman,
+        fontFamily = RobotoSerifRegular,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
         lineHeight = 24.sp,

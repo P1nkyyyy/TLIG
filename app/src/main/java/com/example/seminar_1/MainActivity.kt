@@ -13,24 +13,24 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.seminar_1.components.general.BottomNavigationBar
-import com.example.seminar_1.screens.HomeScreen
-import com.example.seminar_1.screens.MessagesScreen
-import com.example.seminar_1.screens.OutlineScreen
-import com.example.seminar_1.screens.SavedMessagesScreen
-import com.example.seminar_1.screens.SettingsScreen
+import com.example.seminar_1.screens.home.HomeScreen
+import com.example.seminar_1.screens.messages.MessagesScreen
+import com.example.seminar_1.screens.outline.OutlineScreen
+import com.example.seminar_1.screens.saved_messages.SavedMessagesScreen
+import com.example.seminar_1.screens.settings.SettingsScreen
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContent {
-            Seminar1Theme {
-                MyAppNavigation()
+            setContent {
+                Seminar1Theme {
+                    MyAppNavigation()
+                }
             }
-        }
+        } 
     }
-}
 
 @Composable
 fun MyAppNavigation() {
@@ -58,7 +58,4 @@ fun MyAppNavigation() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun AppPreview() {
-    Seminar1Theme {
-        MyAppNavigation()
-    }
 }

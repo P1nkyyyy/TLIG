@@ -1,6 +1,5 @@
 package com.example.seminar_1.utils
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
@@ -11,10 +10,13 @@ import androidx.compose.ui.unit.sp
 import java.util.regex.Pattern
 
 @Composable
-fun contentParser(rawText: String): AnnotatedString {
+fun contentParser(
+    rawText: String,
+    contentColor: Color,
+): AnnotatedString {
     return buildAnnotatedString {
-        val jStyle = SpanStyle(color = MaterialTheme.colorScheme.onPrimary)
-        val vStyle = SpanStyle(color = MaterialTheme.colorScheme.onBackground, fontStyle = FontStyle.Italic)
+        val jStyle = SpanStyle()
+        val vStyle = SpanStyle(fontStyle = FontStyle.Italic, color = contentColor.copy(alpha = 0.8f))
         val linkStyle = SpanStyle(color = Color.Yellow, fontSize = 12.sp)
 
         val matcher = Pattern.compile("<(/?[a-zA-Z]+)([^>]*)>").matcher(rawText)

@@ -15,14 +15,14 @@
     <string name="messages_modal_title">Vzhled a čtení</string>
     <string name="messages_modal_close_button_text">Close bottom sheet</string>
 
-    <string name="messages_settings_menu_text_edit">Text edit</string>
-    <string name="messages_settings_menu_search">Search</string>
+    <string name="messages_settings_menu_text_edit">Editace textu</string>
+    <string name="messages_settings_menu_search">Vyhledat</string>
 
-    <string name="messages_navigable_button_previous">Previous messages</string>
-    <string name="messages_navigable_button_next">Next messages</string>
+    <string name="messages_navigable_button_previous">Předchozí poselství</string>
+    <string name="messages_navigable_button_next">Následujicí poselství</string>
 
-    <string name="messages_modal_item_text_size_decrease">Decrease size of the Message text</string>
-    <string name="messages_modal_item_text_size_increase">Increase size of the Message text</string>
+    <string name="messages_modal_item_text_size_decrease">Zmenšit velikost textu</string>
+    <string name="messages_modal_item_text_size_increase">Zvětšit velikost textu</string>
 
 
 </resources>
