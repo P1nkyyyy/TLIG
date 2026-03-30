@@ -5,10 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.seminar_1.data_classes.MessageType
+import com.example.seminar_1.data_classes.NoteType
 
-@Database(entities = [MessageType::class], version = 1)
+@Database(entities = [MessageType::class, NoteType::class], version = 1)
 abstract class TligDatabase : RoomDatabase() {
     abstract fun messagesDao(): MessagesDao
+    abstract fun notesDao(): NotesDao
 
     companion object {
         @Volatile

@@ -22,6 +22,9 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class MessagesViewModel(private val repository: MessageRepository) : ViewModel() {
+    /**
+     * Messages
+     */
     private val _currentMessage = MutableStateFlow<MessageType?>(null)
     val currentMessage: StateFlow<MessageType?> = _currentMessage.asStateFlow()
 
@@ -80,6 +83,22 @@ class MessagesViewModel(private val repository: MessageRepository) : ViewModel()
     fun updateBackground(bg: Color, content: Color) {
         backgroundColor = bg
         contentColor = content
+    }
+
+
+    /**
+     * Notes
+     */
+    private val _currentNote = MutableStateFlow<String?>(null)
+
+    val currentNote: StateFlow<String?> = _currentNote.asStateFlow()
+
+    fun loadNote(id: Int, messageId: Int) {
+        viewModelScope.launch {
+            repository.getNoteById(id, messageId).collectLatest { note ->
+                _currentNote.value = note?.content
+            }
+        }
     }
 
     companion object {

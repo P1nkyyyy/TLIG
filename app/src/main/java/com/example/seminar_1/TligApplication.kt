@@ -8,5 +8,5 @@ import kotlin.getValue
 class TligApplication : Application() {
     val database by lazy { TligDatabase.getDatabase(this) }
 
-    val messageRepository by lazy { MessageRepository(database.messagesDao()) }
+    val messageRepository by lazy { MessageRepository(database.messagesDao(), database.notesDao()) }
 }
