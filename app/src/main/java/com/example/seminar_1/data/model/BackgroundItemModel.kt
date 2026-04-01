@@ -1,8 +1,8 @@
-package com.example.seminar_1.data_classes
+package com.example.seminar_1.data.model
 
 import androidx.compose.ui.graphics.Color
 
-data class BackgroundItemType(
+data class BackgroundItemModel(
     val id: String,
     val containerColor: Color,
     val barColor: Color,

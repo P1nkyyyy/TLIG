@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.messages
+package com.example.seminar_1.screens.messages.components.settings
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.ViewAgenda
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -19,7 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.R
-import com.example.seminar_1.data_classes.ModalItemType
+import com.example.seminar_1.data.model.ModalItemModel
+import com.example.seminar_1.ui.components.SegmentedControl
 
 @Composable
 fun MainSettingsContent(
@@ -31,10 +35,32 @@ fun MainSettingsContent(
     onBackgroundColor: (Color, Color) -> Unit
 ) {
     val items = listOf(
-        ModalItemType(stringResource(R.string.messages_modal_item_text_size), { TextSizer(textSize, onTextSize) }),
-        ModalItemType(stringResource(R.string.messages_modal_item_line_height), { SegmentedControl() }),
-        ModalItemType(stringResource(R.string.messages_modal_item_font), { FontChanger(fontFamily, onOpenFontSelect) }),
-        ModalItemType(stringResource(R.string.messages_modal_item_bg_selection), { BackgroundSelector(onBackgroundColor) }),
+        ModalItemModel(stringResource(R.string.messages_modal_item_text_size), {
+            TextSizer(
+                textSize,
+                onTextSize
+            )
+        }),
+        ModalItemModel(stringResource(R.string.messages_modal_item_line_height), {
+            SegmentedControl(
+                listOf(
+                    Icons.Default.Menu,
+                    Icons.Default.List,
+                    Icons.Default.ViewAgenda,
+                )
+            )
+        }),
+        ModalItemModel(stringResource(R.string.messages_modal_item_font), {
+            FontChanger(
+                fontFamily,
+                onOpenFontSelect
+            )
+        }),
+        ModalItemModel(stringResource(R.string.messages_modal_item_bg_selection), {
+            BackgroundSelector(
+                onBackgroundColor
+            )
+        }),
     )
 
     Column(

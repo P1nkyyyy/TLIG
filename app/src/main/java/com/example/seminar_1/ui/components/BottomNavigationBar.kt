@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.general
+package com.example.seminar_1.ui.components
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Book
@@ -23,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.seminar_1.R
-import com.example.seminar_1.data_classes.BottomNavigationBarItemType
+import com.example.seminar_1.data.model.BottomNavigationBarItemModel
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
@@ -31,11 +31,31 @@ fun BottomNavigationBar(navController: NavController) {
     var selectedItem by remember { mutableIntStateOf(0) }
 
     val navigationBarItems = listOf(
-        BottomNavigationBarItemType(routeName = "home", icon = Icons.Default.Home, stringResource = R.string.home_title),
-        BottomNavigationBarItemType(routeName = "messages", icon = Icons.Default.Favorite, stringResource = R.string.messages_title),
-        BottomNavigationBarItemType(routeName = "outline", icon = Icons.Default.Book, stringResource = R.string.outline_title),
-        BottomNavigationBarItemType(routeName = "saved", icon = Icons.Default.Bookmark, stringResource = R.string.saved_title),
-        BottomNavigationBarItemType(routeName = "settings", icon = Icons.Default.Settings, stringResource = R.string.settings_title)
+        BottomNavigationBarItemModel(
+            routeName = "home",
+            icon = Icons.Default.Home,
+            stringResource = R.string.home_title
+        ),
+        BottomNavigationBarItemModel(
+            routeName = "messages",
+            icon = Icons.Default.Favorite,
+            stringResource = R.string.messages_title
+        ),
+        BottomNavigationBarItemModel(
+            routeName = "outline",
+            icon = Icons.Default.Book,
+            stringResource = R.string.outline_title
+        ),
+        BottomNavigationBarItemModel(
+            routeName = "saved",
+            icon = Icons.Default.Bookmark,
+            stringResource = R.string.saved_title
+        ),
+        BottomNavigationBarItemModel(
+            routeName = "settings",
+            icon = Icons.Default.Settings,
+            stringResource = R.string.settings_title
+        )
     )
 
     NavigationBar(
@@ -55,8 +75,8 @@ fun BottomNavigationBar(navController: NavController) {
                     navController.navigate(navBarItem.routeName)
                     selectedItem = index
                 },
-                icon = { Icon(navBarItem.icon, navBarItem.contentDescription)},
-                label = { Text(stringResource(navBarItem.stringResource))}
+                icon = { Icon(navBarItem.icon, navBarItem.contentDescription) },
+                label = { Text(stringResource(navBarItem.stringResource)) }
             )
         }
     }

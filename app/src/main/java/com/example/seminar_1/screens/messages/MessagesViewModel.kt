@@ -13,8 +13,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.seminar_1.TligApplication
+import com.example.seminar_1.data.model.MessageModel
 import com.example.seminar_1.data.repository.MessageRepository
-import com.example.seminar_1.data_classes.MessageType
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,11 +26,13 @@ class MessagesViewModel(private val repository: MessageRepository) : ViewModel()
     /**
      * Messages
      */
-    private val _currentMessage = MutableStateFlow<MessageType?>(null)
-    val currentMessage: StateFlow<MessageType?> = _currentMessage.asStateFlow()
+    private val _currentMessage = MutableStateFlow<MessageModel?>(null)
+    val currentMessage: StateFlow<MessageModel?> = _currentMessage.asStateFlow()
 
-    private val _allMessages = MutableStateFlow<List<MessageType>>(emptyList())
-    val allMessages: StateFlow<List<MessageType>> = _allMessages.asStateFlow()
+    private var currentMessageJob: Job? = null
+
+    private val _allMessages = MutableStateFlow<List<MessageModel>>(emptyList())
+    val allMessages: StateFlow<List<MessageModel>> = _allMessages.asStateFlow()
 
     var currentMessageId by mutableIntStateOf(1)
         private set
@@ -41,15 +44,21 @@ class MessagesViewModel(private val repository: MessageRepository) : ViewModel()
     var backgroundColor by mutableStateOf(Color(0xFF1B2536))
     var contentColor by mutableStateOf(Color(0xFFE3EAF3))
 
+    var isArchived by mutableStateOf(false)
+
     init {
         loadMessage(currentMessageId)
         loadAllMessages()
     }
+
     fun loadMessage(id: Int) {
         currentMessageId = id
-        viewModelScope.launch {
+        currentMessageJob?.cancel()
+
+        currentMessageJob = viewModelScope.launch {
             repository.getMessageById(id).collectLatest { message ->
                 _currentMessage.value = message
+                isArchived = message.isArchived
             }
         }
     }
@@ -83,6 +92,13 @@ class MessagesViewModel(private val repository: MessageRepository) : ViewModel()
     fun updateBackground(bg: Color, content: Color) {
         backgroundColor = bg
         contentColor = content
+    }
+
+    fun updateArchive() {
+        viewModelScope.launch {
+            repository.updateArchive(currentMessageId, !isArchived)
+            isArchived = !isArchived
+        }
     }
 
 

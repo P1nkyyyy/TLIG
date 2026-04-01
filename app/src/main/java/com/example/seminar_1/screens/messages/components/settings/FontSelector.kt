@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.messages
+package com.example.seminar_1.screens.messages.components.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -49,7 +49,6 @@ fun FontChanger(
         )
     }
 }
-
 
 
 @Preview(showBackground = true, showSystemUi = true)

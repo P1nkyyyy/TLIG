@@ -1,10 +1,10 @@
-package com.example.seminar_1.data_classes
+package com.example.seminar_1.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "messages")
-data class MessageType(
+data class MessageModel(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     val date: String,

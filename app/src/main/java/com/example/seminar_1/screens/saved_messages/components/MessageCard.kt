@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.saved
+package com.example.seminar_1.screens.saved_messages.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

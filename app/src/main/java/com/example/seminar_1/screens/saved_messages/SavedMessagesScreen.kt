@@ -11,12 +11,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.seminar_1.data_classes.MessageType
+import com.example.seminar_1.data.model.MessageModel
 import com.example.seminar_1.ui.theme.Seminar1Theme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.seminar_1.components.saved.MessageCard
+import com.example.seminar_1.screens.saved_messages.components.MessageCard
 import com.example.seminar_1.utils.textParser
 
 @Composable
@@ -31,7 +31,7 @@ fun SavedMessagesScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         LazyColumn{
-            items(messages) { message: MessageType ->
+            items(messages) { message: MessageModel ->
                 MessageCard(
                     message.title,
                     textParser(message.content),

@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.messages
+package com.example.seminar_1.screens.messages.components.settings
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -32,7 +32,9 @@ fun FontSelectContent(
     val scrollState = rememberScrollState()
 
     Column {
-        Box(modifier = Modifier.fillMaxWidth().verticalScroll(scrollState)) {
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(scrollState)) {
             IconButton(onClick = onBack, modifier = Modifier.align(Alignment.CenterStart)) {
                 Icon(Icons.AutoMirrored.Default.ArrowBack, contentDescription = "Zpět")
             }

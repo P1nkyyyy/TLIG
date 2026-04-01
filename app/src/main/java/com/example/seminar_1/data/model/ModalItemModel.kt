@@ -1,8 +1,8 @@
-package com.example.seminar_1.data_classes
+package com.example.seminar_1.data.model
 
 import androidx.compose.runtime.Composable
 
-data class ModalItemType(
+data class ModalItemModel(
     val text: String,
     val component: @Composable () -> Unit,
 )

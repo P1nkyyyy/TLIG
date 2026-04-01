@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.seminar_1.TligApplication
+import com.example.seminar_1.data.model.MessageModel
 import com.example.seminar_1.data.repository.MessageRepository
-import com.example.seminar_1.data_classes.MessageType
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,17 +17,17 @@ import kotlinx.coroutines.launch
 
 class SavedMessagesViewModel(private val repository: MessageRepository) : ViewModel() {
 
-    private val _messages = MutableStateFlow<List<MessageType>>(emptyList())
-    val messages: StateFlow<List<MessageType>> = _messages.asStateFlow()
+    private val _messages = MutableStateFlow<List<MessageModel>>(emptyList())
+    val messages: StateFlow<List<MessageModel>> = _messages.asStateFlow()
 
     init {
-        loadAllMessages()
+        loadAllArchivedMessages()
     }
 
-    private fun loadAllMessages() {
+    private fun loadAllArchivedMessages() {
         viewModelScope.launch {
-            repository.getAllMessages().collectLatest { 
-                _messages.value = it
+            repository.getAllMessages().collectLatest {
+                _messages.value = it.filter { message -> message.isArchived }
             }
         }
     }

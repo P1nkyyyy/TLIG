@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.messages
+package com.example.seminar_1.screens.messages.components.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -53,7 +53,11 @@ fun TextSizer(
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .weight(1f)
-                .border(3.dp, MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(24.dp))
+                .border(
+                    3.dp,
+                    MaterialTheme.colorScheme.surfaceVariant,
+                    shape = RoundedCornerShape(24.dp)
+                )
                 .background(Color(0xFF252525), shape = RoundedCornerShape(24.dp))
                 .padding(8.dp)
         )

@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.seminar_1.data_classes.MessageType
-import com.example.seminar_1.data_classes.NoteType
+import com.example.seminar_1.data.model.MessageModel
+import com.example.seminar_1.data.model.NoteModel
 
-@Database(entities = [MessageType::class, NoteType::class], version = 1)
+@Database(entities = [MessageModel::class, NoteModel::class], version = 1)
 abstract class TligDatabase : RoomDatabase() {
     abstract fun messagesDao(): MessagesDao
     abstract fun notesDao(): NotesDao

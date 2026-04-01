@@ -1,4 +1,4 @@
-package com.example.seminar_1.components.messages
+package com.example.seminar_1.ui.components
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
@@ -23,6 +23,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ViewAgenda
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -31,29 +32,32 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
-fun SegmentedControl() {
-    val options = listOf(
-        Icons.Default.Menu,
-        Icons.Default.List,
-        Icons.Default.ViewAgenda,
-    )
+fun <T> SegmentedControl(
+    items: List<T>,
+) {
     var selectedIndex by remember { mutableStateOf(0) }
 
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp)
-            .border(2.dp, MaterialTheme.colorScheme.surfaceVariant, shape = RoundedCornerShape(24.dp))
+            .border(
+                2.dp,
+                MaterialTheme.colorScheme.surfaceVariant,
+                shape = RoundedCornerShape(24.dp)
+            )
             .background(Color(0xFF252525), shape = RoundedCornerShape(24.dp))
             .padding(4.dp)
     ) {
         val maxWidth = this.maxWidth
-        val itemWidth = maxWidth / options.size
+        val itemWidth = maxWidth / items.size
 
         val animatedOffset by animateDpAsState(
             targetValue = itemWidth * selectedIndex,
@@ -73,15 +77,31 @@ fun SegmentedControl() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            options.forEachIndexed { index, icon ->
+            items.forEachIndexed { index, item ->
                 Box(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
-                        .clickable(interactionSource = remember { MutableInteractionSource() }, indication = null) { selectedIndex = index },
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) { selectedIndex = index },
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(imageVector = icon, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    when (item) {
+                        is ImageVector -> Icon(
+                            imageVector = item,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+
+                        is String -> Text(
+                            text = item,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
             }
         }
@@ -91,9 +111,12 @@ fun SegmentedControl() {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SegmentedControlPreview() {
+    val iconItems = listOf(Icons.Default.Menu, Icons.Default.List, Icons.Default.ViewAgenda)
+    listOf("Jedna", "Dva", "Tři", "Čtyři dlouhý text")
+
     Seminar1Theme {
         Box(modifier = Modifier.padding(16.dp)) {
-            SegmentedControl()
+            SegmentedControl(iconItems)
         }
     }
 }
