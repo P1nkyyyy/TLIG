@@ -6,7 +6,21 @@
     <string name="saved_title">Uložené</string>
     <string name="settings_title">Nastavení</string>
 
-    // EditMessageModal
+    <!-- Home Screen -->
+    <string name="home_feast_card_icon_alt">Kalendář</string>
+    <string name="home_feast_card_title">Dnes slavíme</string>
+
+    <string name="home_message_card_title">Poselství na den"</string>
+    <string name="home_message_card_bookmark_unmarked">Uložit poselství</string>
+    <string name="home_message_card_bookmark_marked">Odebrat z uložených</string>
+    <string name="home_message_card_read_more">Číst celé</string>
+
+    <string name="home_continue_reading_card_title">Pokračovat ve čtení"</string>
+    <string name="home_continue_reading_card_icon_alt">Rozečteno</string>
+
+    <string name="home_on_boarding_card_title">Začínáte číst?</string>
+
+    <!-- Message Screen -->
     <string name="messages_modal_item_text_size">Velikost textu</string>
     <string name="messages_modal_item_line_height">Řádkování</string>
     <string name="messages_modal_item_font">Font</string>
@@ -24,5 +38,6 @@
     <string name="messages_modal_item_text_size_decrease">Zmenšit velikost textu</string>
     <string name="messages_modal_item_text_size_increase">Zvětšit velikost textu</string>
 
+    <string name="note_modal_note">Poznámka</string>
 
 </resources>

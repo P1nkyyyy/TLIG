@@ -34,7 +34,6 @@ private fun internalParser(
     val cleanText = rawText.replace(Regex("(?s)<h>.*?</h>"), "")
 
     return buildAnnotatedString {
-        // Define styles based on contentColor
         val jesusStyle = SpanStyle(color = contentColor)
         val vasulaStyle = SpanStyle(
             fontStyle = FontStyle.Italic,

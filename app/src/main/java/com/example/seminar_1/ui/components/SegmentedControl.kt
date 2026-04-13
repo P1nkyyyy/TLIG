@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ViewAgenda
@@ -26,9 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -41,9 +40,9 @@ import com.example.seminar_1.ui.theme.Seminar1Theme
 @Composable
 fun <T> SegmentedControl(
     items: List<T>,
+    selectedIndex: Int,
+    onItemSelected: (Int) -> Unit
 ) {
-    var selectedIndex by remember { mutableStateOf(0) }
-
     BoxWithConstraints(
         modifier = Modifier
             .fillMaxWidth()
@@ -85,7 +84,7 @@ fun <T> SegmentedControl(
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null
-                        ) { selectedIndex = index },
+                        ) { onItemSelected(index) },
                     contentAlignment = Alignment.Center
                 ) {
                     when (item) {
@@ -111,12 +110,13 @@ fun <T> SegmentedControl(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun SegmentedControlPreview() {
-    val iconItems = listOf(Icons.Default.Menu, Icons.Default.List, Icons.Default.ViewAgenda)
+    val iconItems = listOf(Icons.Default.Menu,
+        Icons.AutoMirrored.Filled.List, Icons.Default.ViewAgenda)
     listOf("Jedna", "Dva", "Tři", "Čtyři dlouhý text")
 
     Seminar1Theme {
         Box(modifier = Modifier.padding(16.dp)) {
-            SegmentedControl(iconItems)
+            SegmentedControl(iconItems, 1, {})
         }
     }
 }

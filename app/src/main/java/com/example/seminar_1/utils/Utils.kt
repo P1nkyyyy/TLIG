@@ -1,8 +1,6 @@
 package com.example.seminar_1.utils
 
-import com.example.seminar_1.data.model.MessageModel
-
-fun getYearFromDate(datum: String): String = datum.split(" ").lastOrNull() ?: "Unknown"
+import com.example.seminar_1.features.messages.data.model.MessageModel
 
 private val monthsNominative = listOf(
     "LEDEN", "ÚNOR", "BŘEZEN", "DUBEN", "KVĚTEN", "ČERVEN",
@@ -13,6 +11,12 @@ private val monthsGenitive = listOf(
     "LEDNA", "ÚNORA", "BŘEZNA", "DUBNA", "KVĚTNA", "ČERVNA",
     "ČERVENCE", "SRPNA", "ZÁŘÍ", "ŘÍJNA", "LISTOPADU", "PROSINCE"
 )
+
+fun getYearFromDate(datum: String): String = datum.split(" ").lastOrNull() ?: "Unknown"
+
+fun getDayFromDate(datum: String): String {
+    return datum.trim().split(".").firstOrNull() ?: ""
+}
 
 fun getMonthFromDate(datum: String): String {
     val rawMonth = datum.trim().split(Regex("\\s+")).getOrNull(1)?.uppercase() ?: return "Unknown"

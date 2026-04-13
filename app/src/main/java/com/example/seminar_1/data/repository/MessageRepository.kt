@@ -2,7 +2,7 @@ package com.example.seminar_1.data.repository
 
 import com.example.seminar_1.data.local.MessagesDao
 import com.example.seminar_1.data.local.NotesDao
-import com.example.seminar_1.data.model.MessageModel
+import com.example.seminar_1.features.messages.data.model.MessageModel
 import kotlinx.coroutines.flow.Flow
 
 class MessageRepository(
@@ -19,8 +19,17 @@ class MessageRepository(
     suspend fun updateArchive(id: Int, isArchived: Boolean): Unit =
         messagesDao.updateArchive(id, isArchived)
 
+    suspend fun updateLastReadParagraph(id: Int, paragraphIndex: Int) =
+        messagesDao.updateLastReadParagraph(id, paragraphIndex)
+
+    suspend fun updateLastOpenedMessage(id: Int, timeStamp: Long) =
+        messagesDao.updateLastOpenedMessage(id, timeStamp)
+
+    fun getLastOpenedMessage(): Flow<MessageModel?> = messagesDao.getLastOpenedMessage()
+
+
     /**
      * Notes
      */
-    fun getNoteById(id: Int, messageId: Int) = notesDao.getNote(id, messageId)
+    fun getNoteById(noteId: Int, messageId: Int) = notesDao.getNote(noteId, messageId)
 }

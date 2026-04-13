@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.seminar_1.data.model.MessageModel
-import com.example.seminar_1.data.model.NoteModel
+import com.example.seminar_1.features.messages.data.model.MessageModel
+import com.example.seminar_1.features.messages.data.model.NoteModel
 
 @Database(entities = [MessageModel::class, NoteModel::class], version = 1)
 abstract class TligDatabase : RoomDatabase() {

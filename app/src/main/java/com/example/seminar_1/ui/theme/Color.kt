@@ -11,8 +11,8 @@ val BackgroundColorLight = Color(0xFFFAFAFA)
 val SurfaceColorLight = Color(0xFFFFFFFF) //TODO
 val SurfaceVariantLight = Color(0xFFE0E0E0)
 
-val PrimaryTextDark = Color(0xFFEAEAEA)
-val SecondaryTextDark = Color(0xFFB0B0B0)
-val BackgroundColorDark = Color(0xFF202020)
-val SurfaceColorDark = Color(0xFF121212)
+val PrimaryTextDark = Color(0xFFF2F2F2)
+val SecondaryTextDark = Color(0xFF9CA3AF)
+val BackgroundColorDark = Color(0xFF161619)
+val SurfaceColorDark = Color(0xFF202025)
 val SurfaceVariantDark = Color(0xFF5B5B5B)
