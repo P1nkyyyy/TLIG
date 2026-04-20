@@ -17,7 +17,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,7 +40,7 @@ fun TextSizer(
             Icon(
                 imageVector = Icons.Default.Remove,
                 contentDescription = stringResource(R.string.messages_modal_item_text_size_decrease),
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.surfaceVariant)
                     .padding(8.dp)
@@ -49,7 +48,7 @@ fun TextSizer(
         }
         Text(
             text = textSize.toString(),
-            color = Color.White,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .weight(1f)
@@ -58,7 +57,10 @@ fun TextSizer(
                     MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(24.dp)
                 )
-                .background(Color(0xFF252525), shape = RoundedCornerShape(24.dp))
+                .background(
+                    MaterialTheme.colorScheme.surfaceVariant,
+                    shape = RoundedCornerShape(24.dp)
+                )
                 .padding(8.dp)
         )
         IconButton(
@@ -67,7 +69,7 @@ fun TextSizer(
             Icon(
                 imageVector = Icons.Default.Add,
                 contentDescription = stringResource(R.string.messages_modal_item_text_size_increase),
-                tint = Color.White,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier
                     .background(MaterialTheme.colorScheme.surfaceVariant)
                     .padding(8.dp)

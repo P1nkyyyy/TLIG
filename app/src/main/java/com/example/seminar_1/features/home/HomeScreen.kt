@@ -1,10 +1,13 @@
 package com.example.seminar_1.features.home
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -29,6 +32,7 @@ import com.example.seminar_1.features.home.components.ContinueReadingCard
 import com.example.seminar_1.features.home.components.FeastCard
 import com.example.seminar_1.features.home.components.MessageCardOnDay
 import com.example.seminar_1.features.home.components.OnboardingCard
+import com.example.seminar_1.features.home.utils.calculateProgressOfReading
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
@@ -56,7 +60,7 @@ fun HomeScreen(
                 modifier = Modifier.padding(bottom = 12.dp, top = 48.dp)
             )
             MessageCardOnDay(
-                it,
+                message = it,
                 onToggleArchive = { viewModel.updateArchive(it) },
                 onClick = { navController.navigate("messages?messageId=${it.id}") },
             )
@@ -68,8 +72,8 @@ fun HomeScreen(
                 modifier = Modifier.padding(bottom = 12.dp, top = 48.dp)
             )
             ContinueReadingCard(
-                it,
-                progress = 0.45f,
+                message = it,
+                progress = calculateProgressOfReading(it),
                 onClick = { navController.navigate("messages?messageId=${it.id}&scrollToLast=true") },
             )
         }
@@ -78,39 +82,40 @@ fun HomeScreen(
             stringResource(R.string.home_on_boarding_card_title),
             modifier = Modifier.padding(bottom = 12.dp, top = 48.dp)
         )
-        LazyRow(
+
+        Row(
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+                .height(IntrinsicSize.Max)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            item {
-                OnboardingCard(
-                    title = "Kdo je Vassula?",
-                    description = "Seznamte se s autorkou díla.",
-                    icon = Icons.Rounded.Info,
-                    iconTint = Color(0xFF60A5FA),
-                    iconBackground = Color(0xFF1E3A8A).copy(alpha = 0.2f),
-                    onClick = {}
-                )
-            }
-            item {
-                OnboardingCard(
-                    title = "Postoj Církve",
-                    description = "Nihil obstat a Imprimatur.",
-                    icon = Icons.Rounded.WorkspacePremium,
-                    iconTint = Color(0xFFC69C6D),
-                    iconBackground = Color(0xFF78350F).copy(alpha = 0.2f),
-                    onClick = {}
-                )
-            }
-            item {
-                OnboardingCard(
-                    title = "Jak začít číst",
-                    description = "Doporučený postup pro nováčky.",
-                    icon = Icons.Rounded.FavoriteBorder,
-                    iconTint = Color(0xFF34D399),
-                    iconBackground = Color(0xFF064E3B).copy(alpha = 0.2f),
-                    onClick = {}
-                )
-            }
+            OnboardingCard(
+                title = stringResource(R.string.home_on_boarding_card_vassula_title),
+                description = stringResource(R.string.home_on_boarding_card_vassula_description),
+                icon = Icons.Rounded.Info,
+                iconTint = Color(0xFF60A5FA),
+                iconBackground = Color(0xFF1E3A8A).copy(alpha = 0.2f),
+                onClick = { navController.navigate("aboutVassula") }
+            )
+
+            OnboardingCard(
+                title = stringResource(R.string.home_on_boarding_card_church_title),
+                description = stringResource(R.string.home_on_boarding_card_church_description),
+                icon = Icons.Rounded.WorkspacePremium,
+                iconTint = Color(0xFFC69C6D),
+                iconBackground = Color(0xFF78350F).copy(alpha = 0.2f),
+                onClick = {}
+            )
+
+            OnboardingCard(
+                title = stringResource(R.string.home_on_boarding_card_begin_reading_title),
+                description = stringResource(R.string.home_on_boarding_card_begin_reading_description),
+                icon = Icons.Rounded.FavoriteBorder,
+                iconTint = Color(0xFF34D399),
+                iconBackground = Color(0xFF064E3B).copy(alpha = 0.2f),
+                onClick = {}
+            )
         }
     }
 }

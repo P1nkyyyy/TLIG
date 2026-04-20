@@ -20,6 +20,15 @@
 
     <string name="home_on_boarding_card_title">Začínáte číst?</string>
 
+    <string name="home_on_boarding_card_vassula_title">Kdo je Vassula?</string>
+    <string name="home_on_boarding_card_vassula_description">Seznamte se s autorkou díla.</string>
+
+    <string name="home_on_boarding_card_church_title">Postoj Církve</string>
+    <string name="home_on_boarding_card_church_description">Nihil obstat a Imprimatur.</string>
+
+    <string name="home_on_boarding_card_begin_reading_title">Jak začít číst</string>
+    <string name="home_on_boarding_card_begin_reading_description">Doporučený postup pro nováčky.</string>
+
     <!-- Message Screen -->
     <string name="messages_modal_item_text_size">Velikost textu</string>
     <string name="messages_modal_item_line_height">Řádkování</string>

@@ -16,12 +16,12 @@ import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -42,22 +42,17 @@ fun MessageCardOnDay(
     onToggleArchive: () -> Unit,
     onClick: () -> Unit,
 ) {
-    val cardBackground = Color(0xFF1A1F27)
-    val borderColor = Color(0xFF2A3441)
-    val dateColor = Color(0xFF64748B)       // slate-500
-    val titleColor = Color(0xFFF1F5F9)      // slate-100
-    val snippetColor = Color(0xFF94A3B8)     // slate-400
-    val goldAccent = Color(0xFFC69C6D)
-
-    val cardShape = RoundedCornerShape(12.dp)
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(cardShape)
-            .background(cardBackground)
+            .clip(MaterialTheme.shapes.medium)
+            .background(MaterialTheme.colorScheme.surface)
             .clickable { onClick() }
-            .border(1.dp, borderColor, cardShape)
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+                MaterialTheme.shapes.medium
+            )
     ) {
         Column(
             modifier = Modifier
@@ -66,7 +61,7 @@ fun MessageCardOnDay(
         ) {
             Text(
                 text = removeNoteParser(message.date).uppercase(),
-                color = goldAccent,
+                color = MaterialTheme.colorScheme.primary,
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Medium,
                 letterSpacing = 1.sp,
@@ -75,7 +70,7 @@ fun MessageCardOnDay(
 
             Text(
                 text = removeNoteParser(message.title),
-                color = titleColor,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = FontFamily.Serif,
@@ -85,7 +80,7 @@ fun MessageCardOnDay(
 
             Text(
                 text = textParser(message.content),
-                color = snippetColor,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 14.sp,
                 fontFamily = FontFamily.Serif,
                 fontStyle = FontStyle.Italic,
@@ -103,14 +98,14 @@ fun MessageCardOnDay(
             ) {
                 Text(
                     text = stringResource(R.string.home_message_card_read_more),
-                    color = goldAccent,
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Medium
                 )
                 Icon(
                     imageVector = Icons.Rounded.ChevronRight,
                     contentDescription = null,
-                    tint = goldAccent,
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(18.dp)
                 )
             }
@@ -127,7 +122,7 @@ fun MessageCardOnDay(
                 contentDescription =
                     if (message.isArchived) stringResource(R.string.home_message_card_bookmark_marked)
                     else stringResource(R.string.home_message_card_bookmark_unmarked),
-                tint = if (message.isArchived) goldAccent else dateColor
+                tint = if (message.isArchived) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

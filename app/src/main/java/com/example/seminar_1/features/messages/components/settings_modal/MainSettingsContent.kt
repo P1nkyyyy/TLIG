@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.ViewAgenda
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -80,6 +81,7 @@ fun MainSettingsContent(
         ) {
             Text(
                 text = stringResource(R.string.messages_modal_title),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 24.sp
             )
@@ -88,6 +90,7 @@ fun MainSettingsContent(
                 modifier = Modifier.align(Alignment.CenterEnd)
             ) {
                 Icon(
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     imageVector = Icons.Default.Close,
                     contentDescription = stringResource(R.string.messages_modal_close_button_text)
                 )
@@ -103,9 +106,10 @@ fun MainSettingsContent(
                 ),
             ) {
                 Text(
-                    item.text.uppercase(),
+                    text = item.text.uppercase(),
                     fontWeight = FontWeight.Medium,
                     fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 item.component()
             }

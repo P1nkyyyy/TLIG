@@ -1,19 +1,21 @@
 package com.example.seminar_1.features.home.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.FavoriteBorder
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
 fun OnboardingCard(
@@ -35,16 +38,18 @@ fun OnboardingCard(
     iconBackground: Color,
     onClick: () -> Unit,
 ) {
-    val cardBackground = Color(0xFF1A1F27)
-    val titleColor = Color(0xFFE2E8F0) // slate-200
-    val descColor = Color(0xFF64748B)  // slate-500
-
     Column(
         modifier = Modifier
-            .width(160.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(cardBackground)
+            .width(170.dp)
+            .fillMaxHeight()
+            .clip(MaterialTheme.shapes.medium)
+            .background(MaterialTheme.colorScheme.surface)
             .clickable { onClick() }
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+                MaterialTheme.shapes.medium
+            )
             .padding(16.dp),
         horizontalAlignment = Alignment.Start
     ) {
@@ -67,16 +72,17 @@ fun OnboardingCard(
 
         Text(
             text = title,
-            color = titleColor,
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 14.sp,
-            fontWeight = FontWeight.Medium
+            fontWeight = FontWeight.Medium,
+            lineHeight = 18.sp
         )
 
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
             text = description,
-            color = descColor,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontSize = 12.sp,
             lineHeight = 16.sp
         )
@@ -86,12 +92,14 @@ fun OnboardingCard(
 @Preview(showBackground = true)
 @Composable
 fun OnboardingCardPreview() {
-    OnboardingCard(
-        title = "Jak začít číst",
-        description = "Doporučený postup pro nováčky.",
-        icon = Icons.Rounded.FavoriteBorder,
-        iconTint = Color(0xFF34D399),
-        iconBackground = Color(0xFF064E3B).copy(alpha = 0.2f),
-        onClick = {}
-    )
+    Seminar1Theme(true) {
+        OnboardingCard(
+            title = "Jak začít číst",
+            description = "Doporučený postup pro nováčky.",
+            icon = Icons.Rounded.FavoriteBorder,
+            iconTint = Color(0xFF34D399),
+            iconBackground = Color(0xFF064E3B).copy(alpha = 0.2f),
+            onClick = {}
+        )
+    }
 }

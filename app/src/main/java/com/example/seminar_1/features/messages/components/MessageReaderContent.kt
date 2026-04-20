@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.example.seminar_1.R
 import com.example.seminar_1.features.messages.data.model.MessageModel
 import com.example.seminar_1.features.messages.data.model.MessageThemeSettingsUI
+import com.example.seminar_1.ui.theme.spacing
 import com.example.seminar_1.utils.contentParser
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
@@ -99,9 +101,8 @@ fun MessageReaderContent(
     ) {
         LazyColumn(
             state = lazyListState,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 24.dp, vertical = 16.dp),
+            modifier = Modifier.fillMaxSize(),
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.base3),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
@@ -114,6 +115,7 @@ fun MessageReaderContent(
                         style = MaterialTheme.typography.labelMedium.copy(
                             letterSpacing = 2.sp,
                             fontFamily = selectedFontFamily,
+                            fontSize = (themeSettings.textSize * 0.7).sp,
                             fontWeight = FontWeight.Bold
                         ),
                         color = themeSettings.contentColor.copy(alpha = 0.5f),
@@ -186,8 +188,8 @@ fun MessageContent(
 
     Text(
         text = annotatedMessage,
+        color = contentColor,
         style = MaterialTheme.typography.bodyLarge.copy(
-            color = contentColor,
             fontSize = textSize,
             lineHeight = textSize * lineHeight,
             fontFamily = fontFamily

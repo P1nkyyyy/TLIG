@@ -17,13 +17,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -44,28 +44,16 @@ fun ContinueReadingCard(
     progress: Float,
     onClick: () -> Unit,
 ) {
-    // Definice barev vycházejících z návrhu
-    val gradientStart = Color(0xFF1E252F)
-    val gradientEnd = Color(0xFF161B22)
-    val borderColor = Color(0x4D334155)      // slate-700/30
-    val goldAccent = Color(0xFFC69C6D)
-    val titleColor = Color(0xFFF8FAFC)       // white / slate-50
-    val snippetColor = Color(0xFF94A3B8)     // slate-400
-    val iconColor = Color(0xFF64748B)        // slate-500
-    val progressTrackColor = Color(0xFF1E293B) // slate-800
-
-    val cardShape = RoundedCornerShape(12.dp)
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(cardShape)
-            .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(gradientStart, gradientEnd)
-                )
+            .clip(MaterialTheme.shapes.medium)
+            .background(MaterialTheme.colorScheme.surface)
+            .border(
+                1.dp,
+                MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+                MaterialTheme.shapes.medium
             )
-            .border(1.dp, borderColor, cardShape)
             .clickable { onClick() }
     ) {
         Box(
@@ -75,9 +63,9 @@ fun ContinueReadingCard(
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(
-                            goldAccent.copy(alpha = 0.2f),
-                            goldAccent,
-                            goldAccent.copy(alpha = 0.2f)
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
                         )
                     )
                 )
@@ -98,7 +86,7 @@ fun ContinueReadingCard(
             ) {
                 Text(
                     text = removeNoteParser(message.date).uppercase(),
-                    color = goldAccent,
+                    color = MaterialTheme.colorScheme.primary,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium,
                     letterSpacing = 1.sp,
@@ -107,14 +95,14 @@ fun ContinueReadingCard(
                 Icon(
                     imageVector = Icons.AutoMirrored.Outlined.MenuBook,
                     contentDescription = stringResource(R.string.home_continue_reading_card_icon_alt),
-                    tint = iconColor,
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(20.dp)
                 )
             }
 
             Text(
                 text = removeNoteParser(message.title),
-                color = titleColor,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
                 fontFamily = FontFamily.Serif,
@@ -124,7 +112,7 @@ fun ContinueReadingCard(
 
             Text(
                 text = textParser(message.content),
-                color = snippetColor,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 14.sp,
                 fontFamily = FontFamily.Serif,
                 fontStyle = FontStyle.Italic,
@@ -132,7 +120,6 @@ fun ContinueReadingCard(
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.padding(bottom = 16.dp)
-
             )
 
             Row(
@@ -145,13 +132,13 @@ fun ContinueReadingCard(
                         .weight(1f)
                         .height(4.dp)
                         .clip(RoundedCornerShape(percent = 50))
-                        .background(progressTrackColor)
+                        .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.8f))
                 ) {
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(fraction = progress)
                             .height(4.dp)
-                            .background(goldAccent)
+                            .background(MaterialTheme.colorScheme.primary)
                     )
                 }
 
@@ -160,7 +147,7 @@ fun ContinueReadingCard(
                 val percentageStr = "${(progress * 100).roundToInt()} %"
                 Text(
                     text = percentageStr,
-                    color = snippetColor,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Medium
                 )
@@ -169,7 +156,7 @@ fun ContinueReadingCard(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFF11141A)
+@Preview(showBackground = true)
 @Composable
 fun ContinueReadingCardPreview() {
     val mockMessage = MessageModel(

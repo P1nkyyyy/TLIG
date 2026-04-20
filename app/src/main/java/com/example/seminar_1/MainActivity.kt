@@ -10,7 +10,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -20,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.seminar_1.features.home.HomeScreen
 import com.example.seminar_1.features.home.HomeViewModel
+import com.example.seminar_1.features.home.components.ArticleScreen
 import com.example.seminar_1.features.messages.MessagesScreen
 import com.example.seminar_1.features.outline.OutlineScreen
 import com.example.seminar_1.features.saved_messages.SavedMessagesScreen
@@ -44,6 +47,13 @@ fun MyAppNavigation() {
     val navController = rememberNavController()
     val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
     val messageToContinue by homeViewModel.messageToContinue.collectAsState()
+
+    val context = LocalContext.current
+
+    val aboutVassula = remember {
+        context.resources.openRawResource(R.raw.about_vassula)
+            .bufferedReader().use { it.readText() }
+    }
 
     Scaffold(
         bottomBar = {
@@ -83,6 +93,15 @@ fun MyAppNavigation() {
                 }
             }
             composable("settings") { Box(Modifier.padding(innerPadding)) { SettingsScreen() } }
+            composable("aboutVassula") {
+                Box(Modifier.padding(innerPadding)) {
+                    ArticleScreen(
+                        title = "O Vassule",
+                        markdownContent = aboutVassula,
+                        navController = navController,
+                    )
+                }
+            }
         }
     }
 }
