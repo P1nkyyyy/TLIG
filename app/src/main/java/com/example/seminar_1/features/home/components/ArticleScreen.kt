@@ -57,7 +57,6 @@ import dev.jeziellago.compose.markdowntext.MarkdownText
 @Composable
 fun ArticleScreen(
     title: String,
-    markdownContent: String,
     navController: NavController
 ) {
     val accentGold = Color(0xFFC69C6D)

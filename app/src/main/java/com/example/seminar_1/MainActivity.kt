@@ -10,9 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
@@ -48,12 +46,12 @@ fun MyAppNavigation() {
     val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
     val messageToContinue by homeViewModel.messageToContinue.collectAsState()
 
-    val context = LocalContext.current
-
-    val aboutVassula = remember {
-        context.resources.openRawResource(R.raw.about_vassula)
-            .bufferedReader().use { it.readText() }
-    }
+//    val context = LocalContext.current
+//
+//    val aboutVassula = remember {
+//        context.resources.openRawResource(R.raw.about_vassula)
+//            .bufferedReader().use { it.readText() }
+//    }
 
     Scaffold(
         bottomBar = {
@@ -97,7 +95,6 @@ fun MyAppNavigation() {
                 Box(Modifier.padding(innerPadding)) {
                     ArticleScreen(
                         title = "O Vassule",
-                        markdownContent = aboutVassula,
                         navController = navController,
                     )
                 }
