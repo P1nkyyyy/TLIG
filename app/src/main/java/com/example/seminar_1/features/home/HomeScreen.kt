@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.seminar_1.R
@@ -38,7 +38,7 @@ import com.example.seminar_1.ui.theme.Seminar1Theme
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     val feastCelebrations by viewModel.feastCelebrations.collectAsState()
     val messageOnDay by viewModel.messageOnDay.collectAsStateWithLifecycle()

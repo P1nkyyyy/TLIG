@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
@@ -66,7 +67,10 @@ fun <T> SegmentedControl(
                 .offset(x = animatedOffset)
                 .width(itemWidth)
                 .fillMaxHeight()
-                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(24.dp))
+                .background(
+                    MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.10f),
+                    RoundedCornerShape(24.dp)
+                )
         )
 
         Row(
@@ -96,7 +100,8 @@ fun <T> SegmentedControl(
                             text = item,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
+                            overflow = TextOverflow.Ellipsis,
+                            fontSize = 13.sp,
                         )
                     }
                 }

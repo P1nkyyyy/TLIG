@@ -27,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.seminar_1.features.settings.data.model.ThemeMode
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
@@ -92,7 +93,7 @@ fun OnboardingCard(
 @Preview(showBackground = true)
 @Composable
 fun OnboardingCardPreview() {
-    Seminar1Theme(true) {
+    Seminar1Theme(ThemeMode.DARK) {
         OnboardingCard(
             title = "Jak začít číst",
             description = "Doporučený postup pro nováčky.",

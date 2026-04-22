@@ -13,10 +13,10 @@ val SecondaryTextDark = Color(0xFFE2E8F0)
 val MutedTextDark = Color(0xFF94A3B8)
 
 // --- LIGHT MODE ---
-val BackgroundColorLight = Color(0xFFF8FAFC)
+val BackgroundColorLight = Color(0xFFF2F2F7)
 val SurfaceColorLight = Color(0xFFFFFFFF)
-val SurfaceVariantLight = Color(0xFFF1F5F9)
-val BorderColorLight = Color(0xFFE2E8F0)
+val SurfaceVariantLight = Color(0xFFE5E5EA)
+val BorderColorLight = Color(0xFFD1D1D6)
 
 val PrimaryTextLight = Color(0xFF0F172A)
 val SecondaryTextLight = Color(0xFF475569)

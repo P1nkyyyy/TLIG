@@ -26,8 +26,8 @@ import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.seminar_1.features.messages.components.MessageReaderContent
 import com.example.seminar_1.features.messages.components.MessagesSettingsMenu
 import com.example.seminar_1.features.messages.components.NavigableMessagesButton
@@ -41,7 +41,7 @@ import com.example.seminar_1.ui.theme.GoldAccent
 fun MessagesScreen(
     messageId: Int,
     scrollToLast: Boolean = false,
-    viewModel: MessagesViewModel = viewModel(factory = MessagesViewModel.Factory)
+    viewModel: MessagesViewModel = hiltViewModel()
 ) {
     LaunchedEffect(messageId) {
         viewModel.loadMessage(messageId)
@@ -72,15 +72,15 @@ fun MessagesScreen(
         }
     }
 
-    val dynamicColorScheme = MaterialTheme.colorScheme.copy(
-        background = viewModel.backgroundColor,
-        onBackground = viewModel.contentColor,
-        surfaceVariant = viewModel.contentColor.copy(alpha = 0.05f),
-        onSurfaceVariant = viewModel.contentColor.copy(alpha = 0.7f),
-        primary = GoldAccent
-    )
-
-    MaterialTheme(colorScheme = dynamicColorScheme) {
+    MaterialTheme(
+        colorScheme = MaterialTheme.colorScheme.copy(
+            background = viewModel.backgroundColor,
+            onBackground = viewModel.contentColor,
+            surfaceVariant = viewModel.contentColor.copy(alpha = 0.05f),
+            onSurfaceVariant = viewModel.contentColor.copy(alpha = 0.7f),
+            primary = GoldAccent
+        )
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()

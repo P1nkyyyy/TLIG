@@ -24,4 +24,7 @@ interface MessagesDao {
 
     @Query("SELECT * FROM messages WHERE lastOpenedMessage > 0 ORDER BY lastOpenedMessage DESC LIMIT 1")
     fun getLastOpenedMessage(): Flow<MessageModel?>
+
+    @Query("SELECT * FROM messages ORDER BY RANDOM() LIMIT 1")
+    suspend fun getRandomMessage(): MessageModel?
 }

@@ -5,7 +5,11 @@ import com.example.seminar_1.data.local.NotesDao
 import com.example.seminar_1.features.messages.data.model.MessageModel
 import kotlinx.coroutines.flow.Flow
 
-class MessageRepository(
+import javax.inject.Inject
+import javax.inject.Singleton
+
+@Singleton
+class MessageRepository @Inject constructor(
     private val messagesDao: MessagesDao,
     private val notesDao: NotesDao,
 ) {

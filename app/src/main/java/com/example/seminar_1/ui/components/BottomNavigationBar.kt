@@ -89,7 +89,7 @@ fun BottomNavigationBar(navController: NavController) {
 fun BottomNavigationBarPreview() {
     val navController = rememberNavController()
 
-    Seminar1Theme(true) {
+    Seminar1Theme() {
         BottomNavigationBar(navController)
     }
 }

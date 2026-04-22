@@ -2,23 +2,21 @@ package com.example.seminar_1.features.home
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.seminar_1.TligApplication
 import com.example.seminar_1.data.repository.MessageRepository
 import com.example.seminar_1.features.home.data.model.FeastCelebrationsModel
 import com.example.seminar_1.features.home.data.network.FeastNetworkClient
 import com.example.seminar_1.features.messages.data.model.MessageModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(private val repository: MessageRepository) : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val repository: MessageRepository) : ViewModel() {
     private val _feastCelebrations = MutableStateFlow(emptyList<FeastCelebrationsModel>())
     val feastCelebrations: StateFlow<List<FeastCelebrationsModel>> =
         _feastCelebrations.asStateFlow()
@@ -69,16 +67,6 @@ class HomeViewModel(private val repository: MessageRepository) : ViewModel() {
     fun updateArchive(message: MessageModel) {
         viewModelScope.launch {
             repository.updateArchive(message.id, !message.isArchived)
-        }
-    }
-
-
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as TligApplication)
-                HomeViewModel(repository = application.messageRepository)
-            }
         }
     }
 }

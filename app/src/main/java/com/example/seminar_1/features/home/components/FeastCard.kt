@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.R
 import com.example.seminar_1.features.home.data.model.FeastCelebrationsModel
+import com.example.seminar_1.features.settings.data.model.ThemeMode
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
@@ -94,7 +95,7 @@ fun FeastCardPreview() {
 //        FeastCelebrationsModel("Památka sv. Jana od Kříže", "", "", 1.2),
     )
     Box(modifier = Modifier.padding(16.dp)) {
-        Seminar1Theme(true) {
+        Seminar1Theme(ThemeMode.DARK) {
             FeastCard(mockFeastCelebrations)
         }
     }

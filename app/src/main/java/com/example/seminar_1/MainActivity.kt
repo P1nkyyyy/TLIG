@@ -12,12 +12,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.seminar_1.core.notifications.NotificationHelper
 import com.example.seminar_1.features.home.HomeScreen
 import com.example.seminar_1.features.home.HomeViewModel
 import com.example.seminar_1.features.home.components.ArticleScreen
@@ -25,15 +27,23 @@ import com.example.seminar_1.features.messages.MessagesScreen
 import com.example.seminar_1.features.outline.OutlineScreen
 import com.example.seminar_1.features.saved_messages.SavedMessagesScreen
 import com.example.seminar_1.features.settings.SettingsScreen
+import com.example.seminar_1.features.settings.SettingsViewModel
 import com.example.seminar_1.ui.components.BottomNavigationBar
 import com.example.seminar_1.ui.theme.Seminar1Theme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
+        NotificationHelper.createNotificationChannel(this)
+
         enableEdgeToEdge()
         setContent {
-            Seminar1Theme {
+            val settingsViewModel: SettingsViewModel = hiltViewModel()
+            val themeMode by settingsViewModel.themeMode.collectAsState()
+            Seminar1Theme(themeMode = themeMode) {
                 MyAppNavigation()
             }
         }
@@ -43,15 +53,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyAppNavigation() {
     val navController = rememberNavController()
-    val homeViewModel: HomeViewModel = viewModel(factory = HomeViewModel.Factory)
+    val homeViewModel: HomeViewModel = hiltViewModel()
     val messageToContinue by homeViewModel.messageToContinue.collectAsState()
-
-//    val context = LocalContext.current
-//
-//    val aboutVassula = remember {
-//        context.resources.openRawResource(R.raw.about_vassula)
-//            .bufferedReader().use { it.readText() }
-//    }
 
     Scaffold(
         bottomBar = {

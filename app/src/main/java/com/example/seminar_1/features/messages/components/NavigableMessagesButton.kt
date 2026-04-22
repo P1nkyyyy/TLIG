@@ -38,6 +38,7 @@ import androidx.compose.ui.unit.dp
 import com.example.seminar_1.R
 import com.example.seminar_1.features.messages.components.messages_modal.MessagesModal
 import com.example.seminar_1.features.messages.data.model.MessageModel
+import com.example.seminar_1.features.settings.data.model.ThemeMode
 import com.example.seminar_1.ui.theme.Seminar1Theme
 import com.example.seminar_1.utils.removeNoteParser
 import kotlinx.coroutines.launch
@@ -131,7 +132,7 @@ fun NavigableMessagesButtonPreview() {
         isCompleted = false,
         lastOpenedMessage = 0,
     )
-    Seminar1Theme(false) {
+    Seminar1Theme(ThemeMode.LIGHT) {
         Box(Modifier.padding(20.dp)) {
             NavigableMessagesButton(
                 currentMessage = mockMessage,

@@ -7,22 +7,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.seminar_1.TligApplication
-import com.example.seminar_1.features.messages.data.model.MessageModel
 import com.example.seminar_1.data.repository.MessageRepository
+import com.example.seminar_1.features.messages.data.local.ThemePreferences
+import com.example.seminar_1.features.messages.data.model.MessageModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MessagesViewModel(private val repository: MessageRepository) : ViewModel() {
+@HiltViewModel
+class MessagesViewModel @Inject constructor(
+    private val repository: MessageRepository,
+    private val themePreferences: ThemePreferences
+) : ViewModel() {
     /**
      * Messages
      */
@@ -80,26 +82,32 @@ class MessagesViewModel(private val repository: MessageRepository) : ViewModel()
     }
 
     /* #region ThemeSettings */
-    var textSize by mutableIntStateOf(18)
-    var lineHeight by mutableFloatStateOf(1.5f)
-    var selectedFont by mutableStateOf("Serif")
-    var backgroundColor by mutableStateOf(Color(0xFF1B2536))
-    var contentColor by mutableStateOf(Color(0xFFE3EAF3))
+    var textSize by mutableIntStateOf(themePreferences.textSize)
+    var lineHeight by mutableFloatStateOf(themePreferences.lineHeight)
+    var selectedFont by mutableStateOf(themePreferences.selectedFont)
+    var backgroundColor by mutableStateOf(themePreferences.backgroundColor)
+    var contentColor by mutableStateOf(themePreferences.contentColor)
+
     fun updateTextSize(size: Int) {
         textSize = size
+        themePreferences.textSize = size
     }
 
     fun updateFont(font: String) {
         selectedFont = font
+        themePreferences.selectedFont = font
     }
 
     fun updateThemeColor(bg: Color, content: Color) {
         backgroundColor = bg
         contentColor = content
+        themePreferences.backgroundColor = bg
+        themePreferences.contentColor = content
     }
 
     fun updateLineHeight(height: Float) {
         lineHeight = height
+        themePreferences.lineHeight = height
     }
     /* #endregion ThemeSettings */
 
@@ -131,15 +139,6 @@ class MessagesViewModel(private val repository: MessageRepository) : ViewModel()
         viewModelScope.launch {
             repository.getNoteById(noteId, messageId).collectLatest { note ->
                 _currentNote.value = note?.content
-            }
-        }
-    }
-
-    companion object {
-        val Factory: ViewModelProvider.Factory = viewModelFactory {
-            initializer {
-                val application = (this[APPLICATION_KEY] as TligApplication)
-                MessagesViewModel(repository = application.messageRepository)
             }
         }
     }
