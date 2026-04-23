@@ -13,8 +13,8 @@ interface MessagesDao {
     @Query("SELECT * FROM messages WHERE id = :messageId")
     fun get(messageId: Int): Flow<MessageModel>
 
-    @Query("UPDATE messages SET isArchived = :isArchived WHERE id = :messageId")
-    suspend fun updateArchive(messageId: Int, isArchived: Boolean)
+    @Query("UPDATE messages SET isArchived = :isArchived, archivedAt = :archivedAt WHERE id = :messageId")
+    suspend fun updateArchive(messageId: Int, isArchived: Boolean, archivedAt: Long?)
 
     @Query("UPDATE messages SET lastReadParagraph = :paragraphIndex WHERE id = :messageId")
     suspend fun updateLastReadParagraph(messageId: Int, paragraphIndex: Int)

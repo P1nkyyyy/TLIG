@@ -13,4 +13,5 @@ data class MessageModel(
     val isCompleted: Boolean,
     val lastReadParagraph: Int = 0,
     val lastOpenedMessage: Long,
+    val archivedAt: Long? = null,
 )

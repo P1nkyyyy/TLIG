@@ -42,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.features.messages.data.model.MessageModel
+import com.example.seminar_1.features.saved_messages.utils.formatTimestamp
 import com.example.seminar_1.features.settings.data.model.ThemeMode
 import com.example.seminar_1.ui.theme.Seminar1Theme
 import com.example.seminar_1.utils.removeNoteParser
@@ -139,7 +140,7 @@ fun MessageCard(
                             .padding(horizontal = 10.dp, vertical = 4.dp)
                     ) {
                         Text(
-                            text = "Dnes",
+                            text = formatTimestamp(message.archivedAt),
                             color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Medium

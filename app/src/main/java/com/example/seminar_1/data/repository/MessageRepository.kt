@@ -22,8 +22,10 @@ class MessageRepository @Inject constructor(
 
     fun getMessageById(id: Int): Flow<MessageModel> = messagesDao.get(id)
 
-    suspend fun updateArchive(id: Int, isArchived: Boolean): Unit =
-        messagesDao.updateArchive(id, isArchived)
+    suspend fun updateArchive(id: Int, isArchived: Boolean) {
+        val archivedAt = if (isArchived) System.currentTimeMillis() else null
+        messagesDao.updateArchive(id, isArchived, archivedAt)
+    }
 
     suspend fun updateLastReadParagraph(id: Int, paragraphIndex: Int) =
         messagesDao.updateLastReadParagraph(id, paragraphIndex)
