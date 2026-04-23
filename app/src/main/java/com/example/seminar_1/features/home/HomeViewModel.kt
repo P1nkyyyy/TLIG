@@ -50,6 +50,14 @@ class HomeViewModel @Inject constructor(private val repository: MessageRepositor
         viewModelScope.launch {
             val message = repository.getDailyMessage()
             _messageOnDay.value = message
+            
+            val dailyMessageSnapshot = repository.getDailyMessage()
+
+            dailyMessageSnapshot?.let { snapshot ->
+                repository.getMessageById(snapshot.id).collectLatest { updatedMessage ->
+                    _messageOnDay.value = updatedMessage
+                }
+            }
         }
     }
 

@@ -47,7 +47,6 @@ class MessageRepository @Inject constructor(
         return messagesDao.get(randomIndex).firstOrNull()
     }
 
-
     /**
      * Notes
      */
