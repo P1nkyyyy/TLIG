@@ -42,7 +42,7 @@ import com.example.seminar_1.utils.contentParser
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun MessageReaderContent(
+fun MessagesReader(
     message: MessageModel?,
     themeSettings: MessageThemeSettingsUI,
     initialParagraphIndex: Int = 0,
@@ -165,7 +165,12 @@ fun MessageReaderContent(
 
         noteText?.let {
             if (showNoteModal) {
-                NoteModal(noteText = it, onClose = { showNoteModal = false })
+                NoteModal(
+                    noteType = "Biblický odkaz",
+                    originalWord = "Tebe?",
+                    noteText = it,
+                    onClose = { showNoteModal = false }
+                )
             }
         }
     }

@@ -28,8 +28,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.seminar_1.features.messages.components.MessageReaderContent
-import com.example.seminar_1.features.messages.components.MessagesSettingsMenu
+import com.example.seminar_1.features.messages.components.MessagesMainMenu
+import com.example.seminar_1.features.messages.components.MessagesReader
 import com.example.seminar_1.features.messages.components.NavigableMessagesButton
 import com.example.seminar_1.features.messages.components.settings_modal.SettingsModal
 import com.example.seminar_1.features.messages.data.model.MessageThemeSettingsActions
@@ -94,7 +94,7 @@ fun MessagesScreen(
                 pageSpacing = 16.dp
             ) { page ->
                 val messageForPage = allMessages[page]
-                MessageReaderContent(
+                MessagesReader(
                     message = messageForPage,
                     themeSettings = MessageThemeSettingsUI(
                         textSize = viewModel.textSize,
@@ -121,7 +121,7 @@ fun MessagesScreen(
                     exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut(),
                     modifier = Modifier.align(Alignment.TopCenter)
                 ) {
-                    MessagesSettingsMenu(
+                    MessagesMainMenu(
                         isArchived = it.isArchived,
                         onToggleArchive = { viewModel.updateArchive(it) },
                         onOpenSettingsModal = { showSettingsModal = true },

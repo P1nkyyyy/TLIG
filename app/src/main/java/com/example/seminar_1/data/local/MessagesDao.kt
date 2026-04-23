@@ -27,4 +27,7 @@ interface MessagesDao {
 
     @Query("SELECT * FROM messages ORDER BY RANDOM() LIMIT 1")
     suspend fun getRandomMessage(): MessageModel?
+
+    @Query("SELECT COUNT(*) FROM messages")
+    suspend fun getMessagesCount(): Int
 }

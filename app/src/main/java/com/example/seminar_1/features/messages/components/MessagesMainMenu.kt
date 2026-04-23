@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.example.seminar_1.R
 
 @Composable
-fun MessagesSettingsMenu(
+fun MessagesMainMenu(
     isArchived: Boolean,
     onToggleArchive: () -> Unit,
     onOpenSettingsModal: () -> Unit,

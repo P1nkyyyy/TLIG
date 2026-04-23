@@ -54,7 +54,7 @@ fun SettingsItem(
         Column(modifier = Modifier.weight(1f)) {
             Text(
                 text = title,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium
             )
@@ -87,7 +87,7 @@ fun SettingsItem(
 @Preview(showBackground = true)
 @Composable
 fun SettingsItemPreview() {
-    Seminar1Theme() {
+    Seminar1Theme {
         SettingsItem(
             icon = Icons.Rounded.Schedule,
             title = "Čas doručení",

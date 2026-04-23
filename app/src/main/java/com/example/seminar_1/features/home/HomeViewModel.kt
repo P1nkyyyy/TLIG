@@ -48,11 +48,9 @@ class HomeViewModel @Inject constructor(private val repository: MessageRepositor
     }
 
     private fun fetchMessageOnDay() {
-        // TODO: Implement after firebase cloud
         viewModelScope.launch {
-            repository.getMessageById(3).collectLatest { message ->
-                _messageOnDay.value = message
-            }
+            val message = repository.getDailyMessage()
+            _messageOnDay.value = message
         }
     }
 
