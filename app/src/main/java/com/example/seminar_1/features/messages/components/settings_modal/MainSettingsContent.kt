@@ -29,6 +29,8 @@ import com.example.seminar_1.ui.components.SegmentedControl
 @Composable
 fun MainSettingsContent(
     textSize: Int,
+    backgroundColor: Color,
+    contentColor: Color,
     lineHeight: Float,
     fontFamily: String,
     onClose: () -> Unit,
@@ -61,7 +63,7 @@ fun MainSettingsContent(
             FontChanger(fontFamily, onOpenFontSelect)
         }),
         ModalItemModel(stringResource(R.string.messages_modal_item_bg_selection), {
-            BackgroundSelector(onThemeColorsChange)
+            BackgroundSelector(backgroundColor, contentColor, onThemeColorsChange)
         }),
     )
 

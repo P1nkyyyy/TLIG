@@ -156,6 +156,8 @@ fun MessagesScreen(
                 SettingsModal(
                     onDismissRequest = { showSettingsModal = false },
                     textSize = viewModel.textSize,
+                    backgroundColor = viewModel.backgroundColor,
+                    contentColor = viewModel.contentColor,
                     lineHeight = viewModel.lineHeight,
                     fontFamily = viewModel.selectedFont,
                     actions = MessageThemeSettingsActions(

@@ -37,6 +37,8 @@ import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
 fun BackgroundSelector(
+    backgroundColor: Color,
+    contentColor: Color,
     onThemeColorsChange: (Color, Color) -> Unit
 ) {
     val options = listOf(
@@ -47,7 +49,11 @@ fun BackgroundSelector(
         BackgroundItemModel("sepia", Color(0xFFF4ECD8), Color.White, Color.Black),
     )
 
-    var selectedId by remember { mutableStateOf(options[0].id) }
+    val initialId = options.find {
+        it.containerColor == backgroundColor && it.contentColor == contentColor
+    }?.id ?: options[0].id
+
+    var selectedId by remember { mutableStateOf(initialId) }
 
     Row(
         modifier = Modifier
@@ -138,6 +144,6 @@ fun BackgroundCard(
 @Composable
 fun BackgroundSelectorPreview() {
     Seminar1Theme {
-        BackgroundSelector(onThemeColorsChange = { _, _ -> })
+        BackgroundSelector(Color.Red, Color.Blue, onThemeColorsChange = { _, _ -> })
     }
 }

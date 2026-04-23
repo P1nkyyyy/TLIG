@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.seminar_1.features.messages.data.model.MessageThemeSettingsActions
@@ -27,6 +28,8 @@ import com.example.seminar_1.ui.theme.Seminar1Theme
 fun SettingsModal(
     onDismissRequest: () -> Unit,
     textSize: Int,
+    backgroundColor: Color,
+    contentColor: Color,
     lineHeight: Float,
     fontFamily: String,
     actions: MessageThemeSettingsActions,
@@ -59,6 +62,8 @@ fun SettingsModal(
                     "main" -> {
                         MainSettingsContent(
                             textSize = textSize,
+                            backgroundColor = backgroundColor,
+                            contentColor = contentColor,
                             lineHeight = lineHeight,
                             fontFamily = fontFamily,
                             onClose = onDismissRequest,
@@ -89,6 +94,8 @@ fun SettingsModalPreview() {
         Box(modifier = Modifier.padding(16.dp)) {
             SettingsModal(
                 onDismissRequest = {},
+                backgroundColor = MaterialTheme.colorScheme.surface,
+                contentColor = MaterialTheme.colorScheme.onSurface,
                 textSize = 18,
                 lineHeight = 1.5f,
                 fontFamily = "Serif",
