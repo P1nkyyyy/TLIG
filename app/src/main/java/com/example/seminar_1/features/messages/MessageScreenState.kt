@@ -45,11 +45,17 @@ fun rememberMessagesScreenState(
     currentMessageId: Int,
     onMessageChange: (Int) -> Unit
 ): MessagesScreenState {
+    val startIndex = remember(allMessages, currentMessageId) {
+        val index = allMessages.indexOfFirst { it.id == currentMessageId }
+        if (index != -1) index else 0
+    }
+
     val pagerState = rememberPagerState(
-        initialPage = 0,
+        initialPage = startIndex,
         pageCount = { allMessages.size }
     )
-    val state = remember { MessagesScreenState(pagerState, onMessageChange) }
+
+    val state = remember(pagerState) { MessagesScreenState(pagerState, onMessageChange) }
 
     LaunchedEffect(pagerState.currentPage) {
         state.handlePageChange(allMessages, currentMessageId)

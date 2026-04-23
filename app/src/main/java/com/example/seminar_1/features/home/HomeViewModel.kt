@@ -21,7 +21,6 @@ class HomeViewModel @Inject constructor(private val repository: MessageRepositor
     val feastCelebrations: StateFlow<List<FeastCelebrationsModel>> =
         _feastCelebrations.asStateFlow()
 
-
     private val _messageOnDay = MutableStateFlow<MessageModel?>(null)
     val messageOnDay: StateFlow<MessageModel?> = _messageOnDay.asStateFlow()
 

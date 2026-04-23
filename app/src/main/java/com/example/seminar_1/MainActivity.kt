@@ -65,7 +65,11 @@ fun MyAppNavigation() {
             navController = navController,
             startDestination = "home",
         ) {
-            composable("home") { Box(Modifier.padding(innerPadding)) { HomeScreen(navController) } }
+            composable("home") {
+                Box(Modifier.padding(innerPadding)) {
+                    HomeScreen(navController, homeViewModel)
+                }
+            }
             composable(
                 route = "messages?messageId={messageId}&scrollToLast={scrollToLast}",
                 arguments = listOf(

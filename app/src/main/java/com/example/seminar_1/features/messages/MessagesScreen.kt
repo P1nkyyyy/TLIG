@@ -50,6 +50,15 @@ fun MessagesScreen(
     val message by viewModel.currentMessage.collectAsStateWithLifecycle()
     val allMessages by viewModel.allMessages.collectAsStateWithLifecycle()
 
+    if (allMessages.isEmpty()) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(viewModel.backgroundColor)
+        )
+        return
+    }
+
     val screenState = rememberMessagesScreenState(
         allMessages = allMessages,
         currentMessageId = viewModel.currentMessageId,
