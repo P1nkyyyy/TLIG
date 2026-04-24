@@ -137,13 +137,13 @@ fun MessageCard(
                         modifier = Modifier
                             .clip(RoundedCornerShape(8.dp))
                             .background(MaterialTheme.colorScheme.surfaceVariant)
-                            .padding(horizontal = 10.dp, vertical = 4.dp)
+                            .padding(horizontal = 12.dp, vertical = 0.dp)
                     ) {
                         Text(
                             text = formatTimestamp(message.archivedAt),
                             color = MaterialTheme.colorScheme.onBackground,
                             fontSize = 11.sp,
-                            fontWeight = FontWeight.Medium
+                            fontWeight = FontWeight.Medium,
                         )
                     }
                 }
@@ -194,12 +194,13 @@ fun DeleteBackground(
 fun MessageCardPreview() {
     val mockMessage = MessageModel(
         id = 0,
-        title = "Ježíš je mi blízko",
+        title = "Ježíš je mi blízko a já jsem tak daleko",
         date = "31. ledna 2019",
         content = "Ó, Pane, veď mou duši po stezkách Věčného Života, veď Svou Církev k Jednotě, kéž je Tvé Poselství, se vším jeho bohatstvím, přijato celým Tvým stvořením!",
         isArchived = false,
         isCompleted = false,
         lastOpenedMessage = 0,
+        archivedAt = 2331374763404
     )
     Seminar1Theme(ThemeMode.DARK) {
         MessageCard(mockMessage, false, false, {}, {}, {})

@@ -85,11 +85,16 @@ fun BackgroundCard(
         modifier = Modifier
             .width(65.dp)
             .height(90.dp)
+            .border(
+                width = if (isSelected) 2.dp else 1.dp,
+                color = if (isSelected) option.contentColor else option.contentColor.copy(alpha = 0.2f),
+                shape = RoundedCornerShape(16.dp)
+            )
             .clip(RoundedCornerShape(16.dp))
             .background(option.containerColor)
             .clickable { onClick() }
             .padding(8.dp),
-        contentAlignment = Alignment.TopCenter
+        contentAlignment = Alignment.TopCenter,
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),

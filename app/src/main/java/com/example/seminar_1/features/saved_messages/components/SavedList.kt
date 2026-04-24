@@ -22,13 +22,14 @@ fun SavedList(
 ) {
     var selectedIds by remember { mutableStateOf(setOf<Int>()) }
     val isMultiSelectMode = selectedIds.isNotEmpty()
+    val reversedMessages = remember(messages) { messages.reversed() }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         items(
-            items = messages,
+            items = reversedMessages,
             key = { it.id }
         ) { message ->
             val isSelected = selectedIds.contains(message.id)
