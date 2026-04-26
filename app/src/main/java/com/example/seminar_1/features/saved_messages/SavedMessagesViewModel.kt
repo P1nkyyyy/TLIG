@@ -26,6 +26,7 @@ class SavedMessagesViewModel @Inject constructor(private val repository: Message
         viewModelScope.launch {
             repository.getAllMessages().collectLatest {
                 _messages.value = it.filter { message -> message.isArchived }
+                    .sortedByDescending { message -> message.archivedAt ?: 0L }
             }
         }
     }
