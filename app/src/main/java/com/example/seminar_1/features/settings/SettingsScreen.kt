@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.seminar_1.features.settings.components.SettingsMainMenu
 import com.example.seminar_1.features.settings.components.theme.SettingsThemeContent
+import com.example.seminar_1.features.settings.data.model.NotificationSettings
 import com.example.seminar_1.features.settings.data.model.SettingsModel
 import com.example.seminar_1.ui.theme.spacing
 
@@ -35,6 +38,7 @@ fun SettingsScreen(
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = MaterialTheme.spacing.base3)
+            .verticalScroll(rememberScrollState())
             .statusBarsPadding()
     ) {
         AnimatedContent(
@@ -54,11 +58,20 @@ fun SettingsScreen(
                 "main" -> {
                     SettingsMainMenu(
                         SettingsModel(
-                            isDailyNotificationEnabled = viewModel.isDailyNotificationEnabled,
-                            selectedHour = viewModel.selectedHour,
-                            selectedMinute = viewModel.selectedMinute,
-                            toggleNotifications = { enabled -> viewModel.toggleNotifications(enabled) },
-                            updateTime = { hour, minute -> viewModel.updateTime(hour, minute) },
+                            dailyMessage = NotificationSettings(
+                                isEnabled = viewModel.isDailyMessageNotificationEnabled,
+                                hour = viewModel.dailyMessageNotificationHour,
+                                minute = viewModel.dailyMessageNotificationMinute,
+                                toggle = { viewModel.toggleDailyMessageTime(it) },
+                                updateTime = { h, m -> viewModel.updateDailyMessageTime(h, m) }
+                            ),
+                            threePrayers = NotificationSettings(
+                                isEnabled = viewModel.isDailyPrayersNotificationEnabled,
+                                hour = viewModel.dailyPrayersNotificationHour,
+                                minute = viewModel.dailyPrayersNotificationMinute,
+                                toggle = { viewModel.toggleDailyPrayersTime(it) },
+                                updateTime = { h, m -> viewModel.updateDailyPrayersTime(h, m) }
+                            ),
                             themeMode = viewModel.themeMode.collectAsState().value
                         ),
                         onOpenTheme = { currentScreen = "theme" },

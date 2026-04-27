@@ -21,16 +21,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.seminar_1.R
 import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
 fun NotificationToggleItem(
+    title: String,
+    subTitle: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
@@ -52,13 +52,13 @@ fun NotificationToggleItem(
         Spacer(modifier = Modifier.width(16.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = stringResource(R.string.settings_notifications_toggle_title),
+                text = title,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium
             )
             Text(
-                text = stringResource(R.string.settings_notifications_toggle_description),
+                text = subTitle,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontSize = 13.sp,
                 modifier = Modifier.padding(top = 2.dp)
@@ -81,6 +81,6 @@ fun NotificationToggleItem(
 @Composable
 fun NotificationToggleItemPreview() {
     Seminar1Theme {
-        NotificationToggleItem(true, {})
+        NotificationToggleItem("Nadpis", "Podnadpis", true, {})
     }
 }

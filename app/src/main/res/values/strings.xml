@@ -53,9 +53,12 @@
     <string name="settings_main_menu_notifications">Oznámení</string>
     <string name="settings_main_menu_customization">Přizpůsobení</string>
 
-    <string name="settings_notifications_toggle_title">Poselství na den</string>
-    <string name="settings_notifications_toggle_description">Denní připomenutí k přečtení poselství</string>
+    <string name="settings_message_notifications_toggle_title">Poselství na den</string>
+    <string name="settings_message_notifications_toggle_description">Denní připomenutí k přečtení poselství</string>
     <string name="settings_notifications_time_title">Čas upozornění"</string>
+
+    <string name="settings_prayer_notifications_toggle_title">Tří denní modlitby</string>
+    <string name="settings_prayer_notifications_toggle_description">Denní připomenutí ke třem modlitbám</string>
 
     <string name="settings_theme_menu_title">Motiv aplikace</string>
     <string name="settings_theme_menu_light">Světlý</string>

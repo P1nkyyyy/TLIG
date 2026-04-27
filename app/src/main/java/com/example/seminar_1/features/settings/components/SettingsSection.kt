@@ -18,7 +18,7 @@ import com.example.seminar_1.ui.theme.Seminar1Theme
 
 @Composable
 fun SettingsSection(
-    title: String,
+    title: String?,
     content: @Composable () -> Unit
 ) {
     Column(
@@ -26,14 +26,17 @@ fun SettingsSection(
             .fillMaxWidth()
             .padding(vertical = 16.dp)
     ) {
-        Text(
-            text = title.uppercase(),
-            color = MaterialTheme.colorScheme.primary,
-            fontSize = 11.sp,
-            fontWeight = FontWeight.Bold,
-            letterSpacing = 1.sp,
-            modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
-        )
+        if (title != null) {
+            Text(
+                text = title.uppercase(),
+                color = MaterialTheme.colorScheme.primary,
+                fontSize = 11.sp,
+                fontWeight = FontWeight.Bold,
+                letterSpacing = 1.sp,
+                modifier = Modifier.padding(bottom = 12.dp, start = 4.dp)
+            )
+        }
+
         Column(
             modifier = Modifier
                 .fillMaxWidth()

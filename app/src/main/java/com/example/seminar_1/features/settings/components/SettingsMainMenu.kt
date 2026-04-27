@@ -41,10 +41,22 @@ fun SettingsMainMenu(
 
         SettingsSection(title = stringResource(R.string.settings_main_menu_notifications)) {
             NotificationToggleItem(
-                isChecked = settings.isDailyNotificationEnabled,
-                onCheckedChange = { settings.toggleNotifications(it) }
+                title = stringResource(R.string.settings_message_notifications_toggle_title),
+                subTitle = stringResource(R.string.settings_message_notifications_toggle_description),
+                isChecked = settings.dailyMessage.isEnabled,
+                onCheckedChange = { settings.dailyMessage.toggle(it) }
             )
-            NotificationTimeSelection(settings)
+            NotificationTimeSelection(settings.dailyMessage)
+        }
+
+        SettingsSection(null) {
+            NotificationToggleItem(
+                title = stringResource(R.string.settings_prayer_notifications_toggle_title),
+                subTitle = stringResource(R.string.settings_prayer_notifications_toggle_description),
+                isChecked = settings.threePrayers.isEnabled,
+                onCheckedChange = { settings.threePrayers.toggle(it) }
+            )
+            NotificationTimeSelection(settings.threePrayers)
         }
 
         SettingsSection(title = stringResource(R.string.settings_main_menu_customization)) {

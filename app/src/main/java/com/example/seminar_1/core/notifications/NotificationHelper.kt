@@ -17,7 +17,8 @@ import java.util.concurrent.TimeUnit
 
 object NotificationHelper {
     private const val CHANNEL_ID = "daily_messages_channel"
-    private const val DAILY_WORK_NAME = "daily_message_work"
+    private const val DAILY_MESSAGES_WORK_NAME = "daily_message_work"
+    private const val THREE_PRAYERS_WORK_NAME = "three_prayers_work"
 
     fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -27,7 +28,8 @@ object NotificationHelper {
             val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
                 description = descriptionText
             }
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
@@ -78,13 +80,43 @@ object NotificationHelper {
             .build()
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
-            DAILY_WORK_NAME,
+            DAILY_MESSAGES_WORK_NAME,
             ExistingPeriodicWorkPolicy.UPDATE,
             workRequest
         )
     }
 
-    fun cancelDailyNotification(context: Context) {
-        WorkManager.getInstance(context).cancelUniqueWork(DAILY_WORK_NAME)
+    fun cancelDailyMessagesNotification(context: Context) {
+        WorkManager.getInstance(context).cancelUniqueWork(DAILY_MESSAGES_WORK_NAME)
+    }
+
+    fun scheduleThreeDailyPrayers(context: Context, hour: Int, minute: Int) {
+        val calendar = Calendar.getInstance()
+        val now = calendar.timeInMillis
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour)
+        calendar.set(Calendar.MINUTE, minute)
+        calendar.set(Calendar.SECOND, 0)
+
+        if (calendar.timeInMillis <= now) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1)
+        }
+
+        val initialDelay = calendar.timeInMillis - now
+
+        val workRequest =
+            PeriodicWorkRequestBuilder<PrayerNotificationWorker>(24, TimeUnit.HOURS)
+                .setInitialDelay(initialDelay, TimeUnit.MILLISECONDS)
+                .build()
+
+        WorkManager.getInstance(context).enqueueUniquePeriodicWork(
+            THREE_PRAYERS_WORK_NAME,
+            ExistingPeriodicWorkPolicy.UPDATE,
+            workRequest
+        )
+    }
+
+    fun cancelThreeDailyPrayers(context: Context) {
+        WorkManager.getInstance(context).cancelUniqueWork(THREE_PRAYERS_WORK_NAME)
     }
 }

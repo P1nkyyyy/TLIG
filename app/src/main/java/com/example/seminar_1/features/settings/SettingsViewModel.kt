@@ -23,34 +23,69 @@ class SettingsViewModel @Inject constructor(
 ) : ViewModel() {
 
     /*#region Notifications*/
-    var isDailyNotificationEnabled by mutableStateOf(settingsPreferences.isDailyNotificationEnabled)
+    var isDailyMessageNotificationEnabled by mutableStateOf(settingsPreferences.isDailyMessageNotificationEnabled)
+        private set
+    var dailyMessageNotificationHour by mutableIntStateOf(settingsPreferences.dailyMessageNotificationHour)
+        private set
+    var dailyMessageNotificationMinute by mutableIntStateOf(settingsPreferences.dailyMessageNotificationMinute)
         private set
 
-    var selectedHour by mutableIntStateOf(settingsPreferences.notificationHour)
+    var isDailyPrayersNotificationEnabled by mutableStateOf(settingsPreferences.isDailyPrayersNotificationEnabled)
+        private set
+    var dailyPrayersNotificationHour by mutableIntStateOf(settingsPreferences.dailyPrayersNotificationHour)
+        private set
+    var dailyPrayersNotificationMinute by mutableIntStateOf(settingsPreferences.dailyPrayersNotificationMinute)
         private set
 
-    var selectedMinute by mutableIntStateOf(settingsPreferences.notificationMinute)
-        private set
-
-    fun toggleNotifications(enabled: Boolean) {
-        isDailyNotificationEnabled = enabled
-        settingsPreferences.isDailyNotificationEnabled = enabled
-        updateNotificationSchedule()
+    fun toggleDailyMessageTime(enabled: Boolean) {
+        isDailyMessageNotificationEnabled = enabled
+        settingsPreferences.isDailyMessageNotificationEnabled = enabled
+        updateDailyMessageSchedule()
     }
 
-    fun updateTime(hour: Int, minute: Int) {
-        selectedHour = hour
-        selectedMinute = minute
-        settingsPreferences.notificationHour = hour
-        settingsPreferences.notificationMinute = minute
-        updateNotificationSchedule()
+    fun updateDailyMessageTime(hour: Int, minute: Int) {
+        dailyMessageNotificationHour = hour
+        dailyMessageNotificationMinute = minute
+        settingsPreferences.dailyMessageNotificationHour = hour
+        settingsPreferences.dailyMessageNotificationMinute = minute
+        updateDailyMessageSchedule()
     }
 
-    private fun updateNotificationSchedule() {
-        if (isDailyNotificationEnabled) {
-            NotificationHelper.scheduleDailyNotification(context, selectedHour, selectedMinute)
+    private fun updateDailyMessageSchedule() {
+        if (isDailyMessageNotificationEnabled) {
+            NotificationHelper.scheduleDailyNotification(
+                context,
+                dailyMessageNotificationHour,
+                dailyMessageNotificationMinute
+            )
         } else {
-            NotificationHelper.cancelDailyNotification(context)
+            NotificationHelper.cancelDailyMessagesNotification(context)
+        }
+    }
+
+    fun toggleDailyPrayersTime(enabled: Boolean) {
+        isDailyPrayersNotificationEnabled = enabled
+        settingsPreferences.isDailyPrayersNotificationEnabled = enabled
+        updateDailyPrayersSchedule()
+    }
+
+    fun updateDailyPrayersTime(hour: Int, minute: Int) {
+        dailyPrayersNotificationHour = hour
+        dailyPrayersNotificationMinute = minute
+        settingsPreferences.dailyPrayersNotificationHour = hour
+        settingsPreferences.dailyPrayersNotificationMinute = minute
+        updateDailyPrayersSchedule()
+    }
+
+    private fun updateDailyPrayersSchedule() {
+        if (isDailyPrayersNotificationEnabled) {
+            NotificationHelper.scheduleThreeDailyPrayers(
+                context,
+                dailyPrayersNotificationHour,
+                dailyPrayersNotificationMinute
+            )
+        } else {
+            NotificationHelper.cancelThreeDailyPrayers(context)
         }
     }
     /*#endregion Notifications*/

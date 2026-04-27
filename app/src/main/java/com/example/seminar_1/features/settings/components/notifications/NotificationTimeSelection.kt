@@ -19,32 +19,33 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.example.seminar_1.R
 import com.example.seminar_1.features.settings.components.SettingsItem
-import com.example.seminar_1.features.settings.data.model.SettingsModel
+import com.example.seminar_1.features.settings.data.model.NotificationSettings
 import com.example.seminar_1.ui.theme.spacing
 import java.util.Locale.getDefault
 
 @Composable
 fun NotificationTimeSelection(
-    settings: SettingsModel,
+    notificationSettings: NotificationSettings,
+    modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
 
     val timePickerDialog = TimePickerDialog(
         context,
         { _, hour: Int, minute: Int ->
-            settings.updateTime(hour, minute)
+            notificationSettings.updateTime(hour, minute)
         },
-        settings.selectedHour,
-        settings.selectedMinute,
+        notificationSettings.hour,
+        notificationSettings.minute,
         true
     )
 
     AnimatedVisibility(
-        visible = settings.isDailyNotificationEnabled,
+        visible = notificationSettings.isEnabled,
         enter = expandVertically() + fadeIn(),
         exit = shrinkVertically() + fadeOut()
     ) {
-        Column {
+        Column(modifier = modifier) {
             Box(modifier = Modifier.padding(vertical = MaterialTheme.spacing.base1)) {
                 HorizontalDivider(color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
@@ -54,8 +55,8 @@ fun NotificationTimeSelection(
                 value = String.format(
                     getDefault(),
                     "%02d:%02d",
-                    settings.selectedHour,
-                    settings.selectedMinute
+                    notificationSettings.hour,
+                    notificationSettings.minute
                 ),
                 onClick = { timePickerDialog.show() }
             )
