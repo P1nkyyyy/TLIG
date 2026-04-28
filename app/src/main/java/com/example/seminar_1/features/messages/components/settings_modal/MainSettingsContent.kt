@@ -47,10 +47,10 @@ fun MainSettingsContent(
     val currentLineHeightIndex = lineHeightOptions.indexOf(lineHeight).coerceAtLeast(0)
 
     val items = listOf(
-        ModalItemModel(stringResource(R.string.messages_modal_item_text_size), {
+        ModalItemModel(stringResource(R.string.messages_settings_modal_text_size_title), {
             TextSizer(textSize, onTextSizeChange)
         }),
-        ModalItemModel(stringResource(R.string.messages_modal_item_line_height), {
+        ModalItemModel(stringResource(R.string.messages_settings_modal_line_height_title), {
             SegmentedControl(
                 items = lineHeightIcons,
                 selectedIndex = currentLineHeightIndex,
@@ -59,10 +59,10 @@ fun MainSettingsContent(
                 }
             )
         }),
-        ModalItemModel(stringResource(R.string.messages_modal_item_font), {
+        ModalItemModel(stringResource(R.string.messages_settings_modal_font_title), {
             FontChanger(fontFamily, onOpenFontSelect)
         }),
-        ModalItemModel(stringResource(R.string.messages_modal_item_bg_selection), {
+        ModalItemModel(stringResource(R.string.messages_settings_modal_bg_selection_title), {
             BackgroundSelector(backgroundColor, contentColor, onThemeColorsChange)
         }),
     )
@@ -82,7 +82,7 @@ fun MainSettingsContent(
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = stringResource(R.string.messages_modal_title),
+                text = stringResource(R.string.messages_settings_modal_title),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 24.sp
@@ -94,7 +94,7 @@ fun MainSettingsContent(
                 Icon(
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     imageVector = Icons.Default.Close,
-                    contentDescription = stringResource(R.string.messages_modal_close_button_text)
+                    contentDescription = stringResource(R.string.modal_close_button_text)
                 )
             }
         }

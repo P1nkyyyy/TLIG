@@ -29,14 +29,20 @@
     <string name="home_on_boarding_card_begin_reading_title">Jak začít číst</string>
     <string name="home_on_boarding_card_begin_reading_description">Doporučený postup pro nováčky.</string>
 
-    <!-- Message Screen -->
-    <string name="messages_modal_item_text_size">Velikost textu</string>
-    <string name="messages_modal_item_line_height">Řádkování</string>
-    <string name="messages_modal_item_font">Font</string>
-    <string name="messages_modal_item_bg_selection">Výběr pozadí</string>
+    <!-- Messages Screen -->
+    <string name="messages_settings_modal_text_size_title">Velikost textu</string>
+    <string name="messages_settings_modal_line_height_title">Řádkování</string>
+    <string name="messages_settings_modal_font_title">Font</string>
+    <string name="messages_settings_modal_bg_selection_title">Výběr pozadí</string>
 
-    <string name="messages_modal_title">Vzhled a čtení</string>
-    <string name="messages_modal_close_button_text">Close bottom sheet</string>
+    <string name="messages_search_modal_empty_title">Pro výraz „%1$s“ jsme nic nenašli.</string>
+    <string name="messages_search_modal_empty_description">Zkuste zadat jiné klíčové slovo.</string>
+    <string name="messages_search_modal_suggested_topics">Doporučená témata</string>
+    <string name="messages_search_modal_search_title">Hledat v poselstvích...</string>
+    <string name="messages_search_modal_search_clear">"Vymazat"</string>
+    <string name="messages_search_modal_search_result">"Výsledky hledání („%1$s“)"</string>
+
+    <string name="messages_settings_modal_title">Vzhled a čtení</string>
 
     <string name="messages_settings_menu_text_edit">Editace textu</string>
     <string name="messages_settings_menu_search">Vyhledat</string>
@@ -67,5 +73,7 @@
 
     <string name="settings_language_menu_title">Jazyk textů</string>
 
+    <!-- General -->
+    <string name="modal_close_button_text">Zavřít modal</string>
 
 </resources>
