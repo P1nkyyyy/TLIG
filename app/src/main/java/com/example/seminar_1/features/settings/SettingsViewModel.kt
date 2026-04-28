@@ -1,10 +1,14 @@
 package com.example.seminar_1.features.settings
 
+import android.Manifest
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.seminar_1.core.notifications.NotificationHelper
@@ -37,7 +41,11 @@ class SettingsViewModel @Inject constructor(
     var dailyPrayersNotificationMinute by mutableIntStateOf(settingsPreferences.dailyPrayersNotificationMinute)
         private set
 
-    fun toggleDailyMessageTime(enabled: Boolean) {
+    fun toggleDailyMessage(enabled: Boolean, onPermissionRequired: () -> Unit) {
+        if (enabled && shouldRequestNotificationPermission()) {
+            onPermissionRequired()
+            return
+        }
         isDailyMessageNotificationEnabled = enabled
         settingsPreferences.isDailyMessageNotificationEnabled = enabled
         updateDailyMessageSchedule()
@@ -63,10 +71,25 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun toggleDailyPrayersTime(enabled: Boolean) {
+    fun toggleDailyPrayers(enabled: Boolean, onPermissionRequired: () -> Unit) {
+        if (enabled && shouldRequestNotificationPermission()) {
+            onPermissionRequired()
+            return
+        }
         isDailyPrayersNotificationEnabled = enabled
         settingsPreferences.isDailyPrayersNotificationEnabled = enabled
         updateDailyPrayersSchedule()
+    }
+
+    private fun shouldRequestNotificationPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        } else {
+            false
+        }
     }
 
     fun updateDailyPrayersTime(hour: Int, minute: Int) {

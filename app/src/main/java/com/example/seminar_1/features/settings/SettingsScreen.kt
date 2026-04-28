@@ -62,14 +62,18 @@ fun SettingsScreen(
                                 isEnabled = viewModel.isDailyMessageNotificationEnabled,
                                 hour = viewModel.dailyMessageNotificationHour,
                                 minute = viewModel.dailyMessageNotificationMinute,
-                                toggle = { viewModel.toggleDailyMessageTime(it) },
+                                toggle = { enabled, onPermissionRequired ->
+                                    viewModel.toggleDailyMessage(enabled, onPermissionRequired)
+                                },
                                 updateTime = { h, m -> viewModel.updateDailyMessageTime(h, m) }
                             ),
                             threePrayers = NotificationSettings(
                                 isEnabled = viewModel.isDailyPrayersNotificationEnabled,
                                 hour = viewModel.dailyPrayersNotificationHour,
                                 minute = viewModel.dailyPrayersNotificationMinute,
-                                toggle = { viewModel.toggleDailyPrayersTime(it) },
+                                toggle = { enabled, onPermissionRequired ->
+                                    viewModel.toggleDailyPrayers(enabled, onPermissionRequired)
+                                },
                                 updateTime = { h, m -> viewModel.updateDailyPrayersTime(h, m) }
                             ),
                             themeMode = viewModel.themeMode.collectAsState().value

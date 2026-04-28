@@ -4,6 +4,6 @@ data class NotificationSettings(
     val isEnabled: Boolean,
     val hour: Int,
     val minute: Int,
-    val toggle: (Boolean) -> Unit,
+    val toggle: (Boolean, onPermissionRequired: () -> Unit) -> Unit,
     val updateTime: (Int, Int) -> Unit
 )

@@ -1,5 +1,8 @@
 package com.example.seminar_1.features.settings.components
 
+import android.Manifest
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -10,6 +13,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +36,17 @@ fun SettingsMainMenu(
     onOpenTheme: () -> Unit,
     onOpenLanguage: () -> Unit
 ) {
+    var pendingAction by remember { mutableStateOf<(() -> Unit)?>(null) }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            pendingAction?.invoke()
+        }
+        pendingAction = null
+    }
+
     Column {
         Text(
             text = "Nastavení",
@@ -44,7 +62,12 @@ fun SettingsMainMenu(
                 title = stringResource(R.string.settings_message_notifications_toggle_title),
                 subTitle = stringResource(R.string.settings_message_notifications_toggle_description),
                 isChecked = settings.dailyMessage.isEnabled,
-                onCheckedChange = { settings.dailyMessage.toggle(it) }
+                onCheckedChange = {
+                    settings.dailyMessage.toggle(it) {
+                        pendingAction = { settings.dailyMessage.toggle(true) {} }
+                        permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                }
             )
             NotificationTimeSelection(settings.dailyMessage)
         }
@@ -54,7 +77,12 @@ fun SettingsMainMenu(
                 title = stringResource(R.string.settings_prayer_notifications_toggle_title),
                 subTitle = stringResource(R.string.settings_prayer_notifications_toggle_description),
                 isChecked = settings.threePrayers.isEnabled,
-                onCheckedChange = { settings.threePrayers.toggle(it) }
+                onCheckedChange = {
+                    settings.threePrayers.toggle(it) {
+                        pendingAction = { settings.threePrayers.toggle(true) {} }
+                        permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                }
             )
             NotificationTimeSelection(settings.threePrayers)
         }
