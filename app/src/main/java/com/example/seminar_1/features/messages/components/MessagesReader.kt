@@ -26,12 +26,10 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.R
@@ -144,15 +142,21 @@ fun MessagesReader(
                 }
 
                 itemsIndexed(paragraphs) { index, paragraph ->
-                    MessageContent(
-                        rawText = paragraph,
-                        contentColor = themeSettings.contentColor,
-                        onNoteClicked = { showNoteModal = true },
-                        messageId = it.id,
-                        loadNote = onLoadNote,
-                        fontFamily = selectedFontFamily,
-                        textSize = themeSettings.textSize.sp,
-                        lineHeight = themeSettings.lineHeight
+                    Text(
+                        text = contentParser(
+                            paragraph,
+                            themeSettings.contentColor,
+                            { showNoteModal = true },
+                            it.id,
+                            onLoadNote
+                        ),
+                        color = themeSettings.contentColor,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = selectedFontFamily,
+                            fontSize = themeSettings.textSize.sp,
+                            lineHeight = themeSettings.textSize.sp * themeSettings.lineHeight,
+                        ),
+                        modifier = Modifier.fillMaxWidth()
                     )
                     if (index < paragraphs.size - 1) {
                         Spacer(modifier = Modifier.height(24.dp))
@@ -174,31 +178,4 @@ fun MessagesReader(
             }
         }
     }
-}
-
-@Composable
-fun MessageContent(
-    rawText: String,
-    contentColor: Color,
-    onNoteClicked: (String) -> Unit,
-    messageId: Int,
-    loadNote: (id: Int, messageId: Int) -> Unit,
-    fontFamily: FontFamily,
-    textSize: TextUnit,
-    lineHeight: Float
-) {
-    val annotatedMessage = remember(rawText) {
-        contentParser(rawText, contentColor, onNoteClicked, messageId, loadNote)
-    }
-
-    Text(
-        text = annotatedMessage,
-        color = contentColor,
-        style = MaterialTheme.typography.bodyLarge.copy(
-            fontSize = textSize,
-            lineHeight = textSize * lineHeight,
-            fontFamily = fontFamily
-        ),
-        modifier = Modifier.fillMaxWidth()
-    )
 }
