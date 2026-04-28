@@ -74,6 +74,4 @@
     <string name="settings_language_menu_title">Jazyk textů</string>
 
     <!-- General -->
-    <string name="modal_close_button_text">Zavřít modal</string>
-
 </resources>
