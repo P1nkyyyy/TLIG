@@ -71,6 +71,7 @@ fun SettingsModal(
                             onOpenFontSelect = { currentScreen = "fonts" },
                             onThemeColorsChange = actions.onThemeColorsChange,
                             onLineHeightChange = actions.onLineHeightChange,
+                            onResetToDefault = actions.onResetToDefault,
                         )
                     }
 
@@ -99,7 +100,7 @@ fun SettingsModalPreview() {
                 textSize = 18,
                 lineHeight = 1.5f,
                 fontFamily = "Serif",
-                actions = MessageThemeSettingsActions({}, {}, { _, _ -> }, {})
+                actions = MessageThemeSettingsActions({}, {}, { _, _ -> }, {}, {})
             )
         }
     }

@@ -3,17 +3,23 @@ package com.example.seminar_1.features.messages.components.settings_modal
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.ViewAgenda
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,6 +44,7 @@ fun MainSettingsContent(
     onOpenFontSelect: () -> Unit,
     onThemeColorsChange: (Color, Color) -> Unit,
     onLineHeightChange: (Float) -> Unit,
+    onResetToDefault: () -> Unit,
 ) {
     val lineHeightOptions = listOf(1.2f, 1.5f, 2.0f)
     val lineHeightIcons = listOf(
@@ -115,6 +122,23 @@ fun MainSettingsContent(
                 )
                 item.component()
             }
+        }
+
+        HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant)
+
+        TextButton(onClick = onResetToDefault) {
+            Icon(
+                imageVector = Icons.Default.Refresh,
+                contentDescription = "",
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
+            Text(
+                "Výchozí nastavení".uppercase(),
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         }
     }
 }

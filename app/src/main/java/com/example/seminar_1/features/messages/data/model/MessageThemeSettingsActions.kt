@@ -7,4 +7,5 @@ data class MessageThemeSettingsActions(
     val onFontChange: (String) -> Unit,
     val onThemeColorsChange: (Color, Color) -> Unit,
     val onLineHeightChange: (Float) -> Unit,
+    val onResetToDefault: () -> Unit,
 )

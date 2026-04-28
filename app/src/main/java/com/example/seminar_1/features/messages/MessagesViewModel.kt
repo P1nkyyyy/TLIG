@@ -109,6 +109,15 @@ class MessagesViewModel @Inject constructor(
         lineHeight = height
         themePreferences.lineHeight = height
     }
+
+    fun resetThemeSettings() {
+        themePreferences.resetToDefault()
+        textSize = themePreferences.textSize
+        lineHeight = themePreferences.lineHeight
+        selectedFont = themePreferences.selectedFont
+        backgroundColor = themePreferences.backgroundColor
+        contentColor = themePreferences.contentColor
+    }
     /* #endregion ThemeSettings */
 
     fun updateArchive(message: MessageModel) {

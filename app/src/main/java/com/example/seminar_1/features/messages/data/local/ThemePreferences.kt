@@ -35,9 +35,13 @@ class ThemePreferences @Inject constructor(@ApplicationContext context: Context)
         }
 
     var contentColor: Color
-        get() = Color(sharedPreferences.getLong(KEY_CONTENT_COLOR, 0xFFE3EAF3L))
+        get() = Color(sharedPreferences.getLong(KEY_CONTENT_COLOR, 0xFFFFFFFFL))
         set(value) = sharedPreferences.edit { putLong(KEY_CONTENT_COLOR, value.toArgb().toLong()) }
 
+    fun resetToDefault() {
+        sharedPreferences.edit { clear() }
+    }
+    
     companion object {
         private const val KEY_TEXT_SIZE = "text_size"
         private const val KEY_LINE_HEIGHT = "line_height"

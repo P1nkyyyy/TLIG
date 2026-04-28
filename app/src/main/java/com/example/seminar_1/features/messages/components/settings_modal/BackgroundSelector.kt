@@ -49,11 +49,9 @@ fun BackgroundSelector(
         BackgroundItemModel("sepia", Color(0xFFF4ECD8), Color.White, Color.Black),
     )
 
-    val initialId = options.find {
+    val selectedId = options.find {
         it.containerColor == backgroundColor && it.contentColor == contentColor
     }?.id ?: options[0].id
-
-    var selectedId by remember { mutableStateOf(initialId) }
 
     Row(
         modifier = Modifier
@@ -67,7 +65,6 @@ fun BackgroundSelector(
                 option = option,
                 isSelected = selectedId == option.id,
                 onClick = {
-                    selectedId = option.id
                     onThemeColorsChange(option.containerColor, option.contentColor)
                 }
             )
