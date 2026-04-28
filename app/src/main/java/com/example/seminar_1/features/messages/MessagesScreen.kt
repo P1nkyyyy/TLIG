@@ -28,11 +28,10 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavHostController
 import com.example.seminar_1.features.messages.components.MessagesMainMenu
 import com.example.seminar_1.features.messages.components.MessagesReader
 import com.example.seminar_1.features.messages.components.NavigableMessagesButton
-import com.example.seminar_1.features.messages.components.search_modal.SearchBottomSheet
+import com.example.seminar_1.features.messages.components.search_modal.SearchModal
 import com.example.seminar_1.features.messages.components.settings_modal.SettingsModal
 import com.example.seminar_1.features.messages.data.model.MessageThemeSettingsActions
 import com.example.seminar_1.features.messages.data.model.MessageThemeSettingsUI
@@ -43,7 +42,6 @@ import com.example.seminar_1.ui.theme.GoldAccent
 fun MessagesScreen(
     messageId: Int,
     scrollToLast: Boolean = false,
-    navController: NavHostController,
     viewModel: MessagesViewModel = hiltViewModel()
 ) {
     LaunchedEffect(messageId) {
@@ -182,18 +180,17 @@ fun MessagesScreen(
                                 content
                             )
                         },
-                        onLineHeightChange = { viewModel.updateLineHeight(it) }
+                        onLineHeightChange = { viewModel.updateLineHeight(it) },
+                        onResetToDefault = { viewModel.resetThemeSettings() }
                     )
                 )
             }
 
             if (showSearchModal) {
-                SearchBottomSheet(
+                SearchModal(
                     messages = allMessages,
                     onDismissRequest = { showSearchModal = false },
-                    onResultClick = {
-                        viewModel.loadMessage(it.id)
-                    }
+                    onResultClick = { viewModel.loadMessage(it.id) }
                 )
             }
         }

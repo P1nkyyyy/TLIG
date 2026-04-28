@@ -40,7 +40,7 @@ import com.example.seminar_1.utils.textParser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBottomSheet(
+fun SearchModal(
     messages: List<MessageModel>,
     onDismissRequest: () -> Unit,
     onResultClick: (MessageModel) -> Unit,

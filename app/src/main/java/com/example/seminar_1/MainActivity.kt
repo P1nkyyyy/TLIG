@@ -88,11 +88,7 @@ fun MyAppNavigation() {
                 val messageId = if (messageIdArg != -1) messageIdArg else messageToContinue?.id ?: 1
 
                 Box(Modifier.padding(bottom = innerPadding.calculateBottomPadding())) {
-                    MessagesScreen(
-                        messageId = messageId,
-                        scrollToLast = scrollToLast,
-                        navController
-                    )
+                    MessagesScreen(messageId = messageId, scrollToLast = scrollToLast)
                 }
             }
             composable("outline") { Box(Modifier.padding(innerPadding)) { OutlineScreen() } }
