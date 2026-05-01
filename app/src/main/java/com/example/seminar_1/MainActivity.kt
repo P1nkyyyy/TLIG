@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavType
@@ -84,8 +83,10 @@ fun MyAppNavigation() {
                 )
             ) { backStackEntry ->
                 val messageIdArg = backStackEntry.arguments?.getInt("messageId") ?: -1
-                val scrollToLast = backStackEntry.arguments?.getBoolean("scrollToLast") ?: false
+                val scrollToLastArg = backStackEntry.arguments?.getBoolean("scrollToLast") ?: false
+
                 val messageId = if (messageIdArg != -1) messageIdArg else messageToContinue?.id ?: 1
+                val scrollToLast = if (messageIdArg == -1) true else scrollToLastArg
 
                 Box(Modifier.padding(bottom = innerPadding.calculateBottomPadding())) {
                     MessagesScreen(messageId = messageId, scrollToLast = scrollToLast)
@@ -108,9 +109,4 @@ fun MyAppNavigation() {
             }
         }
     }
-}
-
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun AppPreview() {
 }
