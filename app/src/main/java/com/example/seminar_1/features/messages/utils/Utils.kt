@@ -2,9 +2,13 @@ package com.example.seminar_1.features.messages.utils
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import com.example.seminar_1.R
 
 @Composable
 fun highlightText(originalText: String, query: String): AnnotatedString {
@@ -46,4 +50,18 @@ fun getSearchSnippet(text: String, query: String, contextLength: Int = 50): Stri
     val actualStart = if (firstSpace != -1 && firstSpace < index) firstSpace + 1 else start
 
     return prefix + text.substring(actualStart)
+}
+
+@Composable
+fun rememberMessageFontFamily(fontFamilyName: String): FontFamily {
+    return remember(fontFamilyName) {
+        when (fontFamilyName) {
+            "Serif" -> FontFamily.Serif
+            "SansSerif" -> FontFamily.SansSerif
+            "Monospace" -> FontFamily.Monospace
+            "Roboto" -> FontFamily(Font(R.font.roboto_serif_regular))
+            "Times New Roman" -> FontFamily(Font(R.font.times_new_roman))
+            else -> FontFamily.Default
+        }
+    }
 }

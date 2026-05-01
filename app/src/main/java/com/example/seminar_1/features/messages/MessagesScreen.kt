@@ -29,8 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.seminar_1.features.messages.components.MessagesMainMenu
-import com.example.seminar_1.features.messages.components.MessagesReader
 import com.example.seminar_1.features.messages.components.NavigableMessagesButton
+import com.example.seminar_1.features.messages.components.messages_reader.MessagesReader
 import com.example.seminar_1.features.messages.components.search_modal.SearchModal
 import com.example.seminar_1.features.messages.components.settings_modal.SettingsModal
 import com.example.seminar_1.features.messages.data.model.MessageThemeSettingsActions
@@ -119,6 +119,7 @@ fun MessagesScreen(
                     onLoadNote = { noteId, messageId -> viewModel.loadNote(noteId, messageId) },
                     onAtBottomChange = { screenState.isAtBottom = it },
                     onAtTopChange = { screenState.isAtTop = it },
+                    onLoadMessage = { viewModel.loadMessage(it) },
                     onScrollIndexChange = { index ->
                         viewModel.updateLastReadParagraph(messageForPage.id, index)
                     }
