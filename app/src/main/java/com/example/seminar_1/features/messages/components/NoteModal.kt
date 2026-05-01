@@ -31,14 +31,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.seminar_1.features.settings.data.model.ThemeMode
 import com.example.seminar_1.ui.theme.Seminar1Theme
+import com.example.seminar_1.utils.noteContentParser
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteModal(
     noteType: String,
-    originalWord: String,
     noteText: String,
     onClose: () -> Unit,
+    onNoteClicked: (String) -> Unit,
 ) {
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
@@ -81,16 +82,6 @@ fun NoteModal(
                     )
                 }
             }
-
-            Text(
-                text = "„$originalWord“",
-                color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily.Serif,
-                modifier = Modifier.padding(bottom = 16.dp)
-            )
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -104,7 +95,11 @@ fun NoteModal(
                 )
 
                 Text(
-                    text = noteText,
+                    text = noteContentParser(
+                        noteText,
+                        MaterialTheme.colorScheme.onBackground,
+                        onNoteClicked,
+                    ),
                     color = MaterialTheme.colorScheme.onBackground,
                     fontSize = 18.sp,
                     fontFamily = FontFamily.Serif,
@@ -122,9 +117,9 @@ fun NoteModalPreview() {
     Seminar1Theme(ThemeMode.DARK) {
         NoteModal(
             noteType = "Biblický odkaz",
-            originalWord = "Tebe?",
             noteText = "Tímto Bůh oslovuje nejen konkrétně autorku, ale každou lidskou duši, která tato slova čte. (Srov. Izajáš 43,1)",
-            onClose = {}
+            onClose = {},
+            onNoteClicked = {}
         )
     }
 }
