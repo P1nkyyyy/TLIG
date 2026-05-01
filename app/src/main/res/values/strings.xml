@@ -38,7 +38,7 @@
     <string name="messages_search_modal_empty_title">Pro výraz „%1$s“ jsme nic nenašli.</string>
     <string name="messages_search_modal_empty_description">Zkuste zadat jiné klíčové slovo.</string>
     <string name="messages_search_modal_suggested_topics">Doporučená témata</string>
-    <string name="messages_search_modal_search_title">Hledat v poselstvích...</string>
+    <string name="messages_search_modal_search_title">Hledat v poselstvích…</string>
     <string name="messages_search_modal_search_clear">"Vymazat"</string>
     <string name="messages_search_modal_search_result">"Výsledky hledání („%1$s“)"</string>
 
@@ -54,6 +54,10 @@
     <string name="messages_modal_item_text_size_increase">Zvětšit velikost textu</string>
 
     <string name="note_modal_note">Poznámka</string>
+
+    <!-- Saved Messages Screen -->
+    <string name="saved_messages_empty_title">Zatím žádná uložená poselství</string>
+    <string name="saved_messages_empty_description">Zde najdete poselství, která si označíte jako uložená.</string>
 
     <!-- Settings Screen -->
     <string name="settings_main_menu_notifications">Oznámení</string>

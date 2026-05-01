@@ -21,6 +21,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.seminar_1.features.saved_messages.components.SavedList
+import com.example.seminar_1.features.saved_messages.components.SavedMessagesEmptyState
 import com.example.seminar_1.ui.theme.Seminar1Theme
 import com.example.seminar_1.ui.theme.spacing
 
@@ -48,7 +49,11 @@ fun SavedMessagesScreen(
 
         HorizontalDivider(modifier = Modifier.padding(top = 16.dp, bottom = 32.dp))
 
-        SavedList(messages, navController, { id -> viewModel.unarchiveMessage(id) })
+        if (messages.isEmpty()) {
+            SavedMessagesEmptyState()
+        } else {
+            SavedList(messages, navController, { id -> viewModel.unarchiveMessage(id) })
+        }
     }
 }
 
