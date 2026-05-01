@@ -152,7 +152,7 @@ fun SearchModal(
                         item {
                             Text(
                                 text = stringResource(R.string.messages_search_modal_search_result).uppercase(),
-                                color = MaterialTheme.colorScheme.onSurface,
+                                color = MaterialTheme.colorScheme.onBackground,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 1.sp,
